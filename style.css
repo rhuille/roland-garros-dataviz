@@ -1,0 +1,65 @@
+#fleche{
+    cursor : pointer;
+    font-size : 3em;
+}
+
+#reload{
+    cursor : pointer;
+    font-size : 2em;
+}
+
+#container{
+    text-align  : center;
+    margin-top: 5px;
+}
+
+#date {
+    text-align: center;
+    font-size: 2em;
+    font-family: 'Poppins';
+}
+
+#textStory {
+    text-align: center;
+    font-size : 1.3em;
+  font-family: 'Poppins';
+
+
+}
+
+.nodes {
+    stroke: #000000;
+    stroke-width: 0px;
+    /* cursor : pointer; */
+}
+
+.links {
+    stroke: #000000;
+    stroke-opacity: 0.5;
+    /* cursor : pointer; */
+}
+.timeLine {
+    stroke: #000000;
+    stroke-width: 3px;
+}
+
+.timeMarker{
+}
+
+.timeMarker:hover {
+   cursor: -webkit-grab;
+}
+
+#info {
+    text-align : center;
+    margin : 10px;
+    font-family: 'Poppins';
+}
+
+#p{
+    font-size : 1.5em;
+    font-family: 'Poppins';
+}
+
+
+
