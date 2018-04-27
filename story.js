@@ -1,6 +1,6 @@
 
 
-var jump = 0;
+var jump = 1;
 
 var story = [
 
