@@ -1,6 +1,6 @@
 
 
-var jump = 0;
+var jump = 1;
 
 var story = [
 
@@ -24,14 +24,10 @@ var story = [
       .style('opacity', 0).transition().delay(2000*jump).duration(1000*jump)
       .style('opacity', 1)
       
-      
-      
       textStory.append('a').attr('href', 'https://github.com/rhuille')
       .append('img').attr('src', 'lin.ico').attr('height', 100)
       .style('opacity', 0).transition().delay(2000*jump).duration(1000*jump)
       .style('opacity', 1)
-      
-      
       
       textStory.append('a').attr('href', 'https://www.linkedin.com/in/raphael-huille/')
       .append('img').attr('src', 'git.png').attr('height', 100)
