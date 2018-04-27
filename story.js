@@ -158,7 +158,7 @@ var story = [
            .attr('fill', 'black')
            .attr('height', 30)
            .attr('width', l(d.id.length) )
-           .attr('y', -30)
+           .attr('y', -21)
            .attr('x', - 50)
            .attr('rx', 5).attr('ry', 5)
            .attr('opacity', 0)
@@ -448,7 +448,7 @@ var story = [
 {'text': "Ensuite la longue période 1988 - 2004 : <br> ou se succèdent de nombreux champions mais aucuns ne sort vraiment du lots <br> &nbsp",
  'f' : function(){
         dateFrom = 1988
-        dateTo = 2004
+        dateTo = 2005
         updateTime();
         update();
   }
@@ -457,7 +457,7 @@ var story = [
 
 {'text':"Et enfin les années 2005-2017 : <br> qui voient l'emergence d'une génération largement dominées par trois joueurs : Rafael Nadal, Rodger Federer et Novak Djokovic",
  'f' : function(){
-        dateFrom = 2004
+        dateFrom = 2005
         dateTo = 2017
         updateTime();
         update();
