@@ -55,18 +55,19 @@ var story = [
     
     reload.transition().delay(1000*jump).duration(1000*jump).style('color', 'rgba(0, 0, 0, 1)')
     
+    textStory.append('p').html('<br> <br> Pour visualiser cette épopée <strong> on va dessiner un graphe </strong> : <br> des points, représentant les joueurs, reliés par des traits, repésentant les matchs.  ')
+             .style('color', 'rgba(0, 0, 0, 0)').transition().delay(1000*jump).duration(1000*jump).style('color', 'rgba(0, 0, 0, 1)')
+             .on('interrupt', function(){ d3.select(this).style('color', 'rgba(0, 0, 0, 1)')  })
+    
+    
+    textStory.append('p').html("<br> <br> On s'interresse à la <strong> phase finale du tournois </strong> : <br> c'est à dire tous les matchs après les quarts de finales (inclues)")
+             .style('color', 'rgba(0, 0, 0, 0)').transition().delay(2000*jump).duration(1000*jump).style('color', 'rgba(0, 0, 0, 1)')
+             .on('interrupt', function(){ d3.select(this).style('color', 'rgba(0, 0, 0, 1)')  })
+    
+    
     
   }
 },
-
-{'text': "Pour visualiser cette épopée on va dessiner un graphe.  <br> Des points, représentant les joueurs, relié par des traits, repésentant les matchs.  ",
- 'f' : function(){}
-},
-
-{'text': " On s'interresse à la phase finale du tournois c'est à dire tous les matchs après les quarts de finales (inclues) <br> &nbsp",
- 'f' : function(){}
-},
-
 
 {'text': 'Considérons un point qui représentera Rafael Nadal <br>   &nbsp',
  'f' : function(){
@@ -121,7 +122,7 @@ var story = [
          })
  }
 },
-{'text': "Comme il a moins participé aux phase finale que Nadal, on le représente par un point plus petit <br> &nbsp",
+{'text': "Comme il a moins participé aux phases finales que Nadal, on le représente par un point plus petit <br> &nbsp",
  'f' : function(){
         graph.select('#MURRAY')
          .transition().duration(500*jump)

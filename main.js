@@ -73,9 +73,7 @@ d3.json("rolland_.json", function(error, data){
     d3.json("position.json", function(error_, position){
 
     // loadGraph
-    
-    console.log(error_)
-    
+        
     data.nodes = data.nodes.map(function(d){
         i = position.data.findIndex(function(d_){return d_.id == d.id})
         d.x = position.data[i].x;
