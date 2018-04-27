@@ -1,6 +1,6 @@
 
 
-var jump = 1;
+var jump = 0;
 
 var story = [
 
@@ -21,6 +21,20 @@ var story = [
              .on('interrupt', function(){ d3.select(this).style('color', 'rgba(0, 0, 0, 1)')  })
                  
       textStory.append('img').attr('src', 'ensae.png').attr('height', 100)
+      .style('opacity', 0).transition().delay(2000*jump).duration(1000*jump)
+      .style('opacity', 1)
+      
+      
+      
+      textStory.append('a').attr('href', 'https://github.com/rhuille')
+      .append('img').attr('src', 'lin.ico').attr('height', 100)
+      .style('opacity', 0).transition().delay(2000*jump).duration(1000*jump)
+      .style('opacity', 1)
+      
+      
+      
+      textStory.append('a').attr('href', 'https://www.linkedin.com/in/raphael-huille/')
+      .append('img').attr('src', 'git.png').attr('height', 100)
       .style('opacity', 0).transition().delay(2000*jump).duration(1000*jump)
       .style('opacity', 1)
                  
@@ -44,6 +58,7 @@ var story = [
     //    .style('opacity', 0).transition().duration(1000).style('opacity', 1)
     
     reload.transition().delay(1000*jump).duration(1000*jump).style('color', 'rgba(0, 0, 0, 1)')
+    
     
   }
 },
