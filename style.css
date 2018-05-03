@@ -3,6 +3,11 @@
     font-size : 3em;
 }
 
+#goToEnd{
+    cursor : pointer;
+    font-size : 2em;
+}
+
 #reload{
     cursor : pointer;
     font-size : 2em;

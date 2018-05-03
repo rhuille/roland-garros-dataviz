@@ -2,7 +2,7 @@
 
 // parameters
 var width = document.getElementById('container').offsetWidth,
-    height = window.screen.height - 250,
+    height = window.screen.height - 240,
     dateFrom = 2005,
     dateTo = 2017,
     strength = 40,
@@ -12,6 +12,7 @@ var width = document.getElementById('container').offsetWidth,
     y_ = 0,
     notCentered = true,
     data_,
+    stop = 0,
     pseudoDateFrom = dateFrom, 
     pseudoDateTo = dateTo;
 
@@ -30,9 +31,24 @@ var fleche = d3.select("#container")
                .append('span')
                .attr('id', 'fleche')
                .style('color', 'rgba(0, 0, 0, 0)')
-               .html('&nbsp  &#8594')
+               .html('&nbsp  &#8594 &nbsp')
                .on('click', go)
-               
+ 
+var goToEnd = d3.select("#container")
+               .append('span')
+               .attr('id', 'goToEnd')
+               .style('color', 'rgba(0, 0, 0, 0)')
+               .html('&#8631')
+               .on('click', function(){ 
+                svg.attr("width", width).attr("height", height);   
+                   counter = story.length;
+                   fleche.interrupt();
+                   textStory.html('')
+                   textStory.selectAll().remove();
+                   goToEndF(); 
+               } )
+ 
+              
 var textStory = d3.select("#container")
                   .append("div")
                   .attr('id', 'textStory')
@@ -54,7 +70,7 @@ var date =  d3.select("#container")
 
 var info =  d3.select("#container")
             .append("div")
-            .attr('id', 'info');
+            .attr('id', 'info').html("&nbsp");
 
 
 var simulation = d3.forceSimulation()
@@ -67,8 +83,8 @@ var simulation = d3.forceSimulation()
 
 simulation.alpha(0.3)
 
-d3.select('body').on('keydown', go)
-    
+d3.select('body').on('keydown', go);
+
 d3.json("rolland_.json", function(error, data){
     d3.json("position.json", function(error_, position){
 
@@ -193,7 +209,9 @@ var counter = 0;
 function go(){
     
     console.log('go')
-
+    
+    if(stop == 0){
+    
     if(counter < story.length){
     
     s = story[counter]
@@ -208,16 +226,16 @@ function go(){
       .transition()
       .duration(1000*jump)
       .style( 'opacity', 0)
-      .on('interrupt', function(){ textStory.html(s.text); s.f(); } )
+      .on('start', function(){stop=1;})
       .on('end', function(){ textStory.html(s.text) })//update text
       .transition()
       .duration(1000*jump)
       .style( 'opacity', 1)
-      .on('interrupt', s.f)
       .on('end', s.f) // apply function
 
     counter++;
     
+    }
     }
 }
 
