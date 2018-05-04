@@ -47,7 +47,7 @@ var goToEnd = d3.select("#container")
                    textStory.selectAll().remove();
                    goToEndF(); 
                } )
- 
+
               
 var textStory = d3.select("#container")
                   .append("div")
@@ -72,6 +72,10 @@ var info =  d3.select("#container")
             .append("div")
             .attr('id', 'info').html("&nbsp");
 
+var signature = d3.select("#container")
+                  .append("div")
+                  .attr('id', 'signature');
+
 
 var simulation = d3.forceSimulation()
 		           .force("link", d3.forceLink().id(function(d) { return d.id }))
@@ -80,10 +84,10 @@ var simulation = d3.forceSimulation()
 		           //.force("center", d3.forceCenter(width*0.25, height / 2))
 		           //.force("center", d3.forceCenter(width *0.75, height / 2))
 		           //.force("center", d3.forceCenter(width*0.5, height / 2));
+//simulation.alpha(0.3)
 
-simulation.alpha(0.3)
 
-d3.select('body').on('keydown', go);
+d3.select('body').on('keydown', function(){ fleche.dispatch('click') });
 
 d3.json("rolland_.json", function(error, data){
     d3.json("position.json", function(error_, position){
@@ -218,18 +222,20 @@ function go(){
     
     fleche.interrupt()
     
-    textStory.selectAll().remove()
+    //textStory.selectAll().remove()
     
-    d3.selectAll().transition()
+    //d3.selectAll().transition()
+    
+    console.log(counter)
     
     textStory
       .transition()
-      .duration(1000*jump)
+      .duration(1000*jump*(counter>0))
       .style( 'opacity', 0)
       .on('start', function(){stop=1;})
       .on('end', function(){ textStory.html(s.text) })//update text
       .transition()
-      .duration(1000*jump)
+      .duration(1000*jump*(counter>0))
       .style( 'opacity', 1)
       .on('end', s.f) // apply function
 

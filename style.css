@@ -1,6 +1,24 @@
+body {
+overflow: hidden;
+}
+
+#signature{
+    text-align  : right;
+    margin-right : 50px;
+}
+
+#signature a{
+    margin-right : 15px;
+}
+
+
+html {
+    overflow-y:scroll;
+}
+
 #fleche{
     cursor : pointer;
-    font-size : 3em;
+    font-size : 5em;
 }
 
 #goToEnd{
