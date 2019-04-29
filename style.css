@@ -1,3 +1,14 @@
+@import url(//db.onlinewebfonts.com/c/67137b5f6928edc941186baaab5a664b?family=Lemon/Milk);
+
+@font-face {font-family: "Lemon/Milk";
+    src: url("//db.onlinewebfonts.com/t/67137b5f6928edc941186baaab5a664b.eot");
+    src: url("//db.onlinewebfonts.com/t/67137b5f6928edc941186baaab5a664b.eot?#iefix") format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/67137b5f6928edc941186baaab5a664b.woff2") format("woff2"),
+    url("//db.onlinewebfonts.com/t/67137b5f6928edc941186baaab5a664b.woff") format("woff"),
+    url("//db.onlinewebfonts.com/t/67137b5f6928edc941186baaab5a664b.ttf") format("truetype"),
+    url("//db.onlinewebfonts.com/t/67137b5f6928edc941186baaab5a664b.svg#Lemon/Milk") format("svg");
+}
+
 body {
     overflow: hidden;
 
@@ -6,7 +17,7 @@ body {
 }
 
 #bg {
-    background:url('bg.png');
+    background:url('bg.jpg');
     background-size: cover;
     opacity: 0.7;
     position: absolute;
