@@ -19,7 +19,6 @@ var width = document.getElementById('container').offsetWidth,
 var scaleRadius, scaleWidth;
 
 // elements
-
 var reload = d3.select("#container")
     .append('span')
     .attr('id', 'reload')
@@ -81,16 +80,11 @@ var simulation = d3.forceSimulation()
     .force("link", d3.forceLink().id(function (d) { return d.id }))
     .force('collide', d3.forceCollide(10))
     .force("charge", d3.forceManyBody().strength(-strength))
-//.force("center", d3.forceCenter(width*0.25, height / 2))
-//.force("center", d3.forceCenter(width *0.75, height / 2))
-//.force("center", d3.forceCenter(width*0.5, height / 2));
-//simulation.alpha(0.3)
-
 
 d3.select('body').on('keydown', function () { fleche.dispatch('click') });
 
-d3.json("rolland_.json", function (error, data) {
-    d3.json("position.json", function (error_, position) {
+d3.json("data/rolland_.json", function (error, data) {
+    d3.json("data/position.json", function (error_, position) {
 
         // loadGraph
 
