@@ -8,8 +8,9 @@
 
   <link href="https://fonts.googleapis.com/css?family=Poppins" rel='stylesheet'>
   <link href="https://fonts.googleapis.com/css?family=Sofia" rel='stylesheet'>
-  <link href="//db.onlinewebfonts.com/c/67137b5f6928edc941186baaab5a664b?family=Lemon/Milk" rel="stylesheet"
-    type="text/css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
 
   <script type="text/javascript" src="d3.v4.js"></script> <!-- https://d3js.org/ -->
   <link rel="stylesheet" type="text/css" href="style.css">
@@ -18,8 +19,23 @@
 
 <body>
   <div id="bg"></div>
-  <div id='container'></div>
+  <div id="nav-bar">
+    <div>A datavizualisation by Raphael Huille </div>
+    <div> Restart See the final chart </div>
+  </div>
+  <div id='container'>
+
+    <div id=start-page>
+      <div>Roland Garros : une histoire de champion</div>
+      <div>Une vizualisation interfactive des hommes et des matchs qui ont marqué le tournois.</div>
+      <div>Start</div>
+    </div>
+
+    <div id=textStory></div>
+  </div>
 </body>
+
+<script type="text/javascript" src="build-start-page.js"></script>
 
 <script type="text/javascript" src="simulation.js"></script>
 <script type="text/javascript" src="loadTime.js"></script>

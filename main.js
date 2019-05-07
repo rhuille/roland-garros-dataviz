@@ -18,39 +18,37 @@ var width = document.getElementById('container').offsetWidth,
 
 var scaleRadius, scaleWidth;
 
-// elements
-var reload = d3.select("#container")
-    .append('span')
-    .attr('id', 'reload')
-    .style('color', 'rgba(0, 0, 0, 0)')
-    .html('&#8634')
-    .on('click', function () { location.reload(); })
+// // elements
+// var reload = d3.select("#container")
+//     .append('span')
+//     .attr('id', 'reload')
+//     .style('color', 'rgba(0, 0, 0, 0)')
+//     .html('&#8634')
+//     .on('click', function () { location.reload(); })
 
-var fleche = d3.select("#container")
-    .append('span')
-    .attr('id', 'fleche')
-    .style('color', 'rgba(0, 0, 0, 0)')
-    .html('&nbsp  &#8594 &nbsp')
-    .on('click', go)
+// var fleche = d3.select("#container")
+//     .append('span')
+//     .attr('id', 'fleche')
+//     .style('color', 'rgba(0, 0, 0, 0)')
+//     .html('&nbsp  &#8594 &nbsp')
+//     .on('click', go)
 
-var goToEnd = d3.select("#container")
-    .append('span')
-    .attr('id', 'goToEnd')
-    .style('color', 'rgba(0, 0, 0, 0)')
-    .html('&#8631')
-    .on('click', function () {
-        svg.attr("width", width).attr("height", height);
-        counter = story.length;
-        fleche.interrupt();
-        textStory.html('')
-        textStory.selectAll().remove();
-        goToEndF();
-    })
+// var goToEnd = d3.select("#container")
+//     .append('span')
+//     .attr('id', 'goToEnd')
+//     .style('color', 'rgba(0, 0, 0, 0)')
+//     .html('&#8631')
+//     .on('click', function () {
+//         svg.attr("width", width).attr("height", height);
+//         counter = story.length;
+//         fleche.interrupt();
+//         textStory.html('')
+//         textStory.selectAll().remove();
+//         goToEndF();
+//     })
 
 
-var textStory = d3.select("#container")
-    .append("div")
-    .attr('id', 'textStory')
+var textStory = d3.select("#textStory")
 
 var svg = d3.select("#container")
     .append("svg")
@@ -215,10 +213,6 @@ function go() {
             s = story[counter]
 
             fleche.interrupt()
-
-            //textStory.selectAll().remove()
-
-            //d3.selectAll().transition()
 
             console.log(counter)
 
