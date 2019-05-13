@@ -1,63 +1,133 @@
 
 
-#nav-bar {
-    display: flex; 
-    justify-content: space-between; 
-    background: black
-}
-
 body {
     overflow: hidden;
     margin: 0;
-
-    /* height: 200px; */
-    /* background-size: cover; */
+    font-family: Poppins;
 }
+
+#nav-bar {
+    display: flex;
+    justify-content: space-between;
+    background: white;
+    padding: 1%;
+    box-shadow: 0 8px 6px -6px black;
+    position: relative;
+    transition: 1s top;
+    top: -90px;
+}
+
+#left-container {
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+#right-container {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+}
+
+.button {
+    padding: 5px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.button:hover{
+    opacity: 1;
+}
+
+#nav-bar-signature {
+    font-size: 1em;
+    font-style: italic;
+}
+
+#nav-bar-title {
+    font-size: 1.5em;
+}
+
+.logo {
+    max-height:100%;
+    object-fit: contain;
+}
+
+#start-page {
+    text-shadow: 0 0 40px rgba(0, 0, 0, 1);
+    letter-spacing: 0.1rem;
+    color: white;
+    line-height: 4rem;
+    position: absolute;
+    bottom: 20%;
+    transition: 2s bottom;
+}
+
+.start-page-title {
+    font-size: 2.5em;
+    text-transform: uppercase;
+    letter-spacing: 1rem;
+}
+
+#sep {
+    height: 3px;
+    background: white;
+    margin: 20px 25%;
+}
+
+#start-page-subtitle {
+    font-size: 2em;
+}
+
+#start-page-signature {
+    font-style: italic;
+}
+
+#start-button {
+    cursor: pointer;
+    border: white solid 3px;
+    border-radius: 10px;
+    margin: 10px 45%;
+}
+
 
 #bg {
     background:url('img/bg.jpg');
     background-size: cover;
-    opacity: 0.7;
+    opacity: 1;
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
     z-index: -10;
-}
-
-#signature{
-    text-align  : right;
-    margin-right : 50px;
-}
-
-#signature a{
-    margin-right : 15px;
-}
-
-
-html {
-    overflow-y:scroll;
-}
-
-#fleche{
-    cursor : pointer;
-    font-size : 5em;
-}
-
-#goToEnd{
-    cursor : pointer;
-    font-size : 2em;
-}
-
-#reload{
-    cursor : pointer;
-    font-size : 2em;
+    transition: 2s opacity;
 }
 
 #container{
-    text-align  : center;
-    margin-top: 5px;
+    text-align: center;
+    padding: 2% 0px;
+}
+
+
+#text-story-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 5%;
+}
+
+#text-story-container .button {
+    font-size: 2em;
+}
+
+#textStory{
+    font-size: 1.3em;
+    opacity: 0.9;
+    padding: 10px;
+    width: -webkit-fill-available;
+    position: relative;
 }
 
 #date {
@@ -69,9 +139,7 @@ html {
 #textStory {
     text-align: center;
     font-size : 1.3em;
-  font-family: 'Poppins';
-
-
+    font-family: 'Poppins';
 }
 
 .nodes {

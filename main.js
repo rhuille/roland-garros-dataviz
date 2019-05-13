@@ -49,6 +49,8 @@ var scaleRadius, scaleWidth;
 
 
 var textStory = d3.select("#textStory")
+var startPage = d3.select("#start-page")
+var navBar = d3.select("#nav-bar")
 
 var svg = d3.select("#container")
     .append("svg")
@@ -79,7 +81,6 @@ var simulation = d3.forceSimulation()
     .force('collide', d3.forceCollide(10))
     .force("charge", d3.forceManyBody().strength(-strength))
 
-d3.select('body').on('keydown', function () { fleche.dispatch('click') });
 
 d3.json("data/rolland_.json", function (error, data) {
     d3.json("data/position.json", function (error_, position) {
@@ -160,7 +161,6 @@ d3.json("data/rolland_.json", function (error, data) {
         //
         //loadTime(data);
 
-        go();
         center();
 
     });
@@ -201,33 +201,37 @@ function center() {
     }
 }
 
-var counter = 0;
+
+
+let counter = 0;
 function go() {
-
-    console.log('go')
-
     if (stop == 0) {
 
-        if (counter < story.length) {
+        if (counter < story.length && counter >= 0) {
 
-            s = story[counter]
-
-            fleche.interrupt()
+            step = story[counter]
 
             console.log(counter)
 
             textStory
                 .transition()
-                .duration(1000 * jump * (counter > 0))
-                .style('opacity', 0)
+                .duration(1000 * jump)
+                .style('left', '0%')
                 .on('start', function () { stop = 1; })
-                .on('end', function () { textStory.html(s.text) })//update text
+                .on('end', function () { textStory.html(step.text) })//update text
                 .transition()
-                .duration(1000 * jump * (counter > 0))
-                .style('opacity', 1)
+                .duration(3000 * jump)
+                .style('left', '-100%')
+                .transition()
+                .duration(3000 * 0)
+                .style('left', '+100%')
+                .transition()
+                .duration(3000 * jump)
+                .style('left', '0%')
                 .on('end', function () {
-                    if (s.f) { s.f(); }
-                }) // apply function
+                    // if (s.f) { s.f(); }
+                    stop = 0
+                })
 
             counter++;
 
@@ -235,6 +239,19 @@ function go() {
     }
 }
 
+function hideLandingPageAndStartStory() {
+    startPage.style('bottom', '100%')
+    d3.select('#bg').style('opacity', '0.7')
+    go();
+}
 
+function toogleNavBarIfMouseUp(e) {
+    if (e.clientY < 90) {
+        navBar.style('top', '0px')
+    }
+    else {
+        navBar.style('top', '-90px')
+    }
+}
 
 

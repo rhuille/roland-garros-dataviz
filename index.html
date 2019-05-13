@@ -17,21 +17,40 @@
 
 </head>
 
-<body>
+<body onmousemove="toogleNavBarIfMouseUp(event)">
   <div id="bg"></div>
   <div id="nav-bar">
-    <div>A datavizualisation by Raphael Huille </div>
-    <div> Restart See the final chart </div>
+    <div id=left-container>
+      <img class=logo src='img/ensae.png'>
+      <img class=logo src='img/toucan.png'>
+      <img class=logo src='img/separator.png'>
+      <div>
+        <span id=nav-bar-title>Roland Garros : une histoire de champion</span><br>
+        <span id=nav-bar-signature>A datavizualisation by Raphael Huille</span>
+      </div>
+    </div>
+    <div id=right-container>
+      <i class="button fas fa-undo-alt"></i>
+      <i class="button far fa-arrow-alt-circle-right"></i>
+    </div>
   </div>
   <div id='container'>
 
     <div id=start-page>
-      <div>Roland Garros : une histoire de champion</div>
-      <div>Une vizualisation interfactive des hommes et des matchs qui ont marqué le tournois.</div>
-      <div>Start</div>
+      <div class=start-page-title>Roland Garros </div>
+      <div class=start-page-title> Une histoire de champion</div>
+      <div id=sep></div>
+      <div id=start-page-subtitle>Une vizualisation interactive des hommes et des matchs qui ont marqué le tournois.
+      </div>
+      <div id=start-page-signature>By Raphael Huille</div>
+      <div id=start-button onclick="hideLandingPageAndStartStory()">start</div>
     </div>
 
-    <div id=textStory></div>
+    <div id=text-story-container>
+      <i class="button fas fa-angle-left"></i>
+      <div id=textStory></div>
+      <i onclick="go()" class="button fas fa-angle-right"></i>
+    </div>
   </div>
 </body>
 

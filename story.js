@@ -2,13 +2,7 @@
 
 var jump = 0.1;
 
-var story = [
-
-  {
-    'text': "",
-    'f': buildStartPage
-  },
-
+const story = [
   {
     'text': "Les internationaux de France Simple Messieurs - Rolland Garros - <br> est un tournois de tennis parmis les plus prestigieux du monde <br> C'est une longue épopée de champions s'affrontant au tennis sur terre battue ! ",
     'f': function () {
@@ -459,7 +453,7 @@ var story = [
 
 
 function evolution(x) {
-  fleche.on('click', function () { })
+  // fleche.on('click', function () { })
   d3.select('body').on('keydown', function () { })
 
   svg.transition().duration(1000)
@@ -472,7 +466,7 @@ function evolution(x) {
         evolution(x);
       }
       else {
-        fleche.on('click', go)
+        // fleche.on('click', go)
         d3.select('body').on('keydown', go)
       }
     })
@@ -495,17 +489,6 @@ function update() {
 
   center();
 }
-
-
-
-function flecheClignote() {
-  fleche.transition().duration(1000).style('color', 'rgba(0, 0, 0, 1)')
-    .on('interrupt', function () { fleche.style('color', 'rgba(0, 0, 0, 1)') })
-    .transition().duration(1000).style('color', 'rgba(0, 0, 0, 0)')
-    .on('interrupt', function () { fleche.style('color', 'rgba(0, 0, 0, 1)') })
-    .on('end', flecheClignote)
-}
-
 
 
 function look(name) {
@@ -547,9 +530,6 @@ function goToEndF() {
   update();
 
   tooltips = svg.append('g');
-
-
-
 
   svg.transition().delay(1000).on('start', function () {
     simulation.nodes(data_.nodes).on("tick", ticked); // from ticked.js
