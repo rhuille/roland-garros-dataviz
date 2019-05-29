@@ -5,22 +5,8 @@ var jump = 0.1;
 const story = [
   {
     'text': "Les internationaux de France Simple Messieurs - Rolland Garros - <br> est un tournois de tennis parmis les plus prestigieux du monde <br> C'est une longue épopée de champions s'affrontant au tennis sur terre battue ! ",
-    'f': function () {
-      d3.select('#startPage').remove()
-
-      textStory.append('p').html('<br> Pour visualiser cette épopée <strong> on va dessiner un graphe : </strong> <br> - des points, représentant les joueurs <br> - reliés par des traits, repésentant les matchs.  ')
-        .style('color', 'rgba(0, 0, 0, 0)').transition().delay(2000 * jump).duration(1000 * jump).style('color', 'rgba(0, 0, 0, 1)')
-
-      textStory.append('img').attr('src', 'img/graph.png')//.attr('height', 100)
-        .style('opacity', 0).transition().delay(3000 * jump).duration(1000 * jump)
-        .style('opacity', 1)
-
-      textStory.append('p').html("On s'interresse à la <strong> phase finale du tournois </strong> : <br> c'est à dire tous les matchs après les quarts de finales (inclues)")
-        .style('color', 'rgba(0, 0, 0, 0)').transition().delay(5000 * jump).duration(1000 * jump).style('color', 'rgba(0, 0, 0, 1)').on('end', function () { stop = 0; })
-
-    }
+    'f': function () {}
   },
-
   {
     'text': 'Considérons un point qui représentera Rafael Nadal <br>   &nbsp',
     'f': function () {

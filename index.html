@@ -18,7 +18,6 @@
 </head>
 
 <body onmousemove="toogleNavBarIfMouseUp(event)">
-  <div id="bg"></div>
   <div id="nav-bar">
     <div id=left-container>
       <img class=logo src='img/ensae.png'>
@@ -37,13 +36,13 @@
   <div id='container'>
 
     <div id=start-page>
-      <div class=start-page-title>Roland Garros </div>
+      <div class=start-page-title>Roland Garros</div>
       <div class=start-page-title> Une histoire de champion</div>
       <div id=sep></div>
       <div id=start-page-subtitle>Une vizualisation interactive des hommes et des matchs qui ont marqué le tournois.
       </div>
       <div id=start-page-signature>By Raphael Huille</div>
-      <div id=start-button onclick="hideLandingPageAndStartStory()">start</div>
+      <div id=start-button__container onclick="hideLandingPageAndStartStory()"><span id=start-button>start<span></div>
     </div>
 
     <div id=text-story-container>
@@ -51,10 +50,16 @@
       <div id=textStory></div>
       <i onclick="go()" class="button fas fa-angle-right"></i>
     </div>
+
+    <svg id=svg>
+      <g id=graph></g>
+      <g id=tooltips></g>
+      <g id=time></g>
+    </svg>
   </div>
 </body>
 
-<script type="text/javascript" src="build-start-page.js"></script>
+<script type="text/javascript" src="selectDomElement.js"></script>
 
 <script type="text/javascript" src="simulation.js"></script>
 <script type="text/javascript" src="loadTime.js"></script>
