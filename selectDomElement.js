@@ -14,6 +14,8 @@ var container = d3.select("#container")
     var tooltips = svg.select('#tooltips');
     var graph = svg.select('#graph')
     var time = svg.select('#time');
+  
+  var date = d3.select("#date");
 
 
 /**********/

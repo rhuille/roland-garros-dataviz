@@ -451,10 +451,10 @@ function evolution(x) {
         // svg.append('text').text(dateTo).attr('oppacity', 0.8).attr('transform', 'scale(5)')
         evolution(x);
       }
-      else {
-        // fleche.on('click', go)
-        d3.select('body').on('keydown', go)
-      }
+      // else {
+      //   // fleche.on('click', go)
+      //   d3.select('body').on('keydown', go)
+      // }
     })
 }
 
@@ -509,8 +509,9 @@ function restore(name) {
 
 
 function goToEndF() {
+  loadInitialGraph();
 
-  loadTime(data_);
+  loadTime(data);
   dateFrom = 1980;
   updateTime();
   update();
@@ -518,8 +519,8 @@ function goToEndF() {
   tooltips = svg.append('g');
 
   svg.transition().delay(1000).on('start', function () {
-    simulation.nodes(data_.nodes).on("tick", ticked); // from ticked.js
-    simulation.force("link").links(data_.links);
+    simulation.nodes(data.nodes).on("tick", ticked); // from ticked.js
+    simulation.force("link").links(data.links);
     simulation.alphaTarget(0.1).restart();
   })
     .on('end', function () {
@@ -541,28 +542,7 @@ function goToEndF() {
 
     })
 
-
   var heightIcon = 50;
-  signature.append('p').style('font-size', '1em').html('dataviz par Raphael Huille, ENSAE')
-    .style('color', 'rgba(0, 0, 0, 0)').transition().delay(0 * jump).duration(1000 * jump).style('color', 'rgba(0, 0, 0, 1)')
-
-  signature.append('a').attr('href', 'https://ensae.fr')
-    .append('img').attr('src', 'img/ensae.png').attr('height', heightIcon)
-    .style('opacity', 0).transition().delay(0 * jump).duration(1000 * jump)
-    .style('opacity', 1)
-
-  signature.append('a').attr('href', 'https://github.com/rhuille')
-    .append('img').attr('src', 'img/lin.ico').attr('height', heightIcon)
-    .style('opacity', 0).transition().delay(0 * jump).duration(1000 * jump)
-    .style('opacity', 1)
-
-  signature.append('a').attr('href', 'https://www.linkedin.com/in/raphael-huille/')
-    .append('img').attr('src', 'img/git.png').attr('height', heightIcon)
-    .style('opacity', 0).transition().delay(0 * jump).duration(1000 * jump)
-    .style('opacity', 1)
-
-
-
 }
 
 

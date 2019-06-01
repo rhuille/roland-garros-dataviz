@@ -12,7 +12,6 @@ var width = document.getElementById('container').offsetWidth,
     y_ = 0,
     notCentered = true,
     data_,
-    stop = 0,
     pseudoDateFrom = dateFrom,
     pseudoDateTo = dateTo;
 
@@ -65,11 +64,6 @@ d3.json("data/rolland_.json", (_, data_input) => {
 //     })
 
 
-var date = d3.select("#container")
-    .append("div")
-    .attr('id', 'date')
-    .html("&nbsp");
-
 // var info = d3.select("#container")
 //     .append("div")
 //     .attr('id', 'info').html("&nbsp");
@@ -83,8 +77,6 @@ var simulation = d3.forceSimulation()
     .force("link", d3.forceLink().id(function (d) { return d.id }))
     .force('collide', d3.forceCollide(10))
     .force("charge", d3.forceManyBody().strength(-strength))
-
-
 
 function augmentData(data, position){
     data.nodes = data.nodes.map(function (d) {
@@ -110,7 +102,12 @@ function augmentData(data, position){
     return data
 }
 
-function loadInitialGraph(data){
+function loadInitialGraph(){
+    console.log('loadInitialGraph')
+    graph.selectAll('line').remove()
+    graph.selectAll('circle').remove()
+    tooltips.selectAll('g').remove()
+
     graph
     .selectAll('line')
     .data(data.links)
@@ -137,8 +134,9 @@ function loadInitialGraph(data){
     .attr('r', 0)
     .attr('fill', 'black')
     .attr('opacity', 0)
-}
 
+    center();
+}
 
 
 // style function
@@ -161,7 +159,6 @@ function games(d) {
     }).length
 }
 
-
 function center() {
     var a = graph.selectAll('.nodes').data().filter(function (d) { return (participation(d) > 0) })
 
@@ -178,35 +175,104 @@ function center() {
 }
 
 
-let counter = 0;
-function go() {
-    if (stop == 0) {
-        if (counter < story.length && counter >= 0) {
-            step = story[counter]
-            console.log(counter)
-            textStory
-                .transition()
-                .duration(1000 * jump)
-                .style('left', '0%')
-                .on('start', function () { stop = 1; })
-                .on('end', function () { textStory.html(step.text) })//update text
-                .transition()
-                .duration(3000 * jump * (counter > 0))
-                .style('left', '-100%')
-                .transition()
-                .duration(0)
-                .style('left', '+100%')
-                .transition()
-                .duration(3000 * jump)
-                .style('left', '0%')
-                .on('end', function () {
-                    if (step.f) { step.f(); }
-                    stop = 0
-                })
-            counter++;
-        }
+// data
+let STATE = {
+    currentStep: 0,
+    targetStep: 0,
+}
+
+
+// computed
+function jump (){
+    if((STATE.targetStep - STATE.currentStep) == 1){
+        return 0.5
+    }else{
+        return 0
     }
 }
+
+function balanced (){
+    return STATE.currentStep == STATE.targetStep
+}
+
+// method
+function launchStepUp(){
+    if(STATE.currentStep > STATE.targetStep + 1){
+        console.error(`You can't launchStepUp when currentStep = ${STATE.currentStep} > targetStep + 1 = ${STATE.targetStep +1}`)
+        return undefined;
+    }
+    if(STATE.currentStep == STATE.targetStep + 1){
+        console.warn('oups : one step up...')
+        STATE.currentStep = STATE.targetStep;
+        return undefined;
+    }
+    console.log('beggining', STATE)
+
+    currentSlide = story[STATE.currentStep]
+    textStory
+    .style('left', '0%')
+    .transition().duration(1000 * jump())
+    .style('left', '-100%')
+    .transition().duration(0)
+    .style('left', '+100%')
+    .on('end', function () { textStory.html(currentSlide.text) })//update text
+    .transition()
+    .duration(1000 * jump())
+    .style('left', '0%')
+    .on('end', function () {
+        if (currentSlide.f) { 
+            currentSlide.f(); 
+        }
+        STATE.currentStep = STATE.currentStep + 1;
+
+        console.log('end', STATE)
+        if(!balanced()){
+            launchStepUp();
+        }
+    })
+}
+
+function goToTargetStep() {
+    if(STATE.currentStep == 0){
+        loadInitialGraph();
+    }
+    if(STATE.targetStep > story.length){
+        return undefined
+    }
+    if(STATE.targetStep == STATE.currentStep){
+        return undefined
+    }
+    if(STATE.targetStep < STATE.currentStep){ // back in step ? 
+        // redo all from the beggining
+        loadInitialGraph();
+        STATE.currentStep = 0;
+        launchStepUp()
+    };
+    if (STATE.targetStep > STATE.currentStep) {
+        launchStepUp()
+    };
+}
+
+function goToNextStep (){
+    if(balanced()){
+        STATE.targetStep = STATE.targetStep + 1;
+        goToTargetStep();
+    };
+};
+
+function goToPreviousStep (){
+    if(balanced()){
+        STATE.targetStep = STATE.targetStep - 1;
+        goToTargetStep();
+    };
+};
+
+function goToStep(step){
+    if(balanced()){
+        STATE.targetStep = step;
+        goToTargetStep();
+    };
+};
 
 function hideLandingPageAndStartStory() {
     startPage
@@ -219,7 +285,10 @@ function hideLandingPageAndStartStory() {
         .style('opacity', '0')
         .transition().ease(d3.easeLinear).duration(500)
         .style('opacity', '1')
-        .on('end', go)
+        .on('end', function(){
+            STATE.targetStep = 1;
+            goToTargetStep();
+        })
     });
 }
 
@@ -230,13 +299,4 @@ function toogleNavBarIfMouseUp(e) {
     else {
         navBar.style('top', '-10vh')
     }
-}
-
-
-function goToStep(i){
-    var jumpSauv = jump
-    jump=0
-
-    go()
-    jump = jumpSauv
 }

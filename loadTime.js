@@ -1,5 +1,5 @@
 
-function loadTime(data){ // Main function
+function loadTime(){ // Main function
 
     // ticks of the time line
     time.append('g')
@@ -63,12 +63,10 @@ function updateTime(){
 }
 
 
-
 // Fonctions utiles
 function dateToX(date){
     return timeWidthMargin+(date-1980)*(width-timeWidthMargin*2)/(2017-1980)
 }
-
 
 function xToDate(x){
     return Math.max(Math.min(Math.round((x-timeWidthMargin)*(2017-1980)/(width-timeWidthMargin*2)+1980), 2017),1980)

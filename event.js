@@ -1,7 +1,7 @@
 
 function nodeMouseOver(selection) {
 
-  if (selection.attr('opacity') >= 1) {
+  if (selection.style('opacity') >= 1) {
 
     var d = selection.datum(),
       x = x_ + d.x + 10, y = y_ + d.y - 30;
