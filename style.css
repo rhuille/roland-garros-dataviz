@@ -193,3 +193,14 @@ body {
     font-size : 1.5vmax;
     font-family: 'Poppins';
 }
+
+#timeline {
+    margin: 10vh;
+    display: flex;
+}
+
+.timeline-element {
+    padding: 10px;
+    background: black;
+    padding: 
+}

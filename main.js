@@ -195,6 +195,10 @@ function balanced (){
     return STATE.currentStep == STATE.targetStep
 }
 
+function currentSlide(){
+    return story[STATE.currentStep]
+}
+
 // method
 function launchStepUp(){
     if(STATE.currentStep > STATE.targetStep + 1){
@@ -208,28 +212,15 @@ function launchStepUp(){
     }
     console.log('beggining', STATE)
 
-    currentSlide = story[STATE.currentStep]
-    textStory
-    .style('left', '0%')
-    .transition().duration(1000 * jump())
-    .style('left', '-100%')
-    .transition().duration(0)
-    .style('left', '+100%')
-    .on('end', function () { textStory.html(currentSlide.text) })//update text
-    .transition()
-    .duration(1000 * jump())
-    .style('left', '0%')
-    .on('end', function () {
-        if (currentSlide.f) { 
-            currentSlide.f(); 
-        }
-        STATE.currentStep = STATE.currentStep + 1;
+    if (currentSlide().f) { 
+        currentSlide().f(); 
+    }
+    STATE.currentStep = STATE.currentStep + 1;
 
-        console.log('end', STATE)
-        if(!balanced()){
-            launchStepUp();
-        }
-    })
+    console.log('end', STATE)
+    if(!balanced()){
+        launchStepUp();
+    }
 }
 
 function goToTargetStep() {
@@ -254,16 +245,41 @@ function goToTargetStep() {
 }
 
 function goToNextStep (){
+
     if(balanced()){
         STATE.targetStep = STATE.targetStep + 1;
-        goToTargetStep();
-    };
+
+        textStory
+        .style('left', '0%')
+        .transition().duration(500)
+        .style('left', '-100%')
+        .transition().duration(0)
+        .style('left', '+100%')
+        .on('end', function () { textStory.html(currentSlide().text) })//update text
+        .transition()
+        .duration(500)
+        .style('left', '0%')
+        .on('end', goToTargetStep)
+    }
+
 };
 
 function goToPreviousStep (){
+
+
     if(balanced()){
         STATE.targetStep = STATE.targetStep - 1;
-        goToTargetStep();
+        textStory
+        .style('left', '0%')
+        .transition().duration(500)
+        .style('left', '+100%')
+        .transition().duration(0)
+        .style('left', '-100%')
+        .on('end', function () { textStory.html(currentSlide().text) })//update text
+        .transition()
+        .duration(500)
+        .style('left', '0%')
+        .on('end', goToTargetStep)
     };
 };
 
@@ -286,8 +302,7 @@ function hideLandingPageAndStartStory() {
         .transition().ease(d3.easeLinear).duration(500)
         .style('opacity', '1')
         .on('end', function(){
-            STATE.targetStep = 1;
-            goToTargetStep();
+            goToNextStep();
         })
     });
 }

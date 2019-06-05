@@ -6,6 +6,7 @@ var navBar = d3.select("#nav-bar")
 var container = d3.select("#container")
 
   var startPage = d3.select("#start-page")
+  var timeline = d3.select("#timeline")
 
   var textStoryContainer = d3.select("#text-story-container")
     var textStory = d3.select("#textStory")

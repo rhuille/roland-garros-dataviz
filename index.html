@@ -45,8 +45,10 @@
       <div id=start-button__container onclick="hideLandingPageAndStartStory()"><span id=start-button>start<span></div>
     </div>
 
+    <div id=timeline></div>
+
     <div id=text-story-container>
-      <i class="button fas fa-angle-left"></i>
+      <i onclick="goToPreviousStep()" class="button fas fa-angle-left"></i>
       <div id=textStory></div>
       <i onclick="goToNextStep()" class="button fas fa-angle-right"></i>
     </div>
@@ -66,7 +68,7 @@
 <script type="text/javascript" src="loadTime.js"></script>
 <script type="text/javascript" src="event.js"></script>
 <script type="text/javascript" src="story.js"></script>
-
+<script type="text/javascript" src="timeline.js"></script>
 
 <script type="text/javascript" src="main.js"></script>
 
