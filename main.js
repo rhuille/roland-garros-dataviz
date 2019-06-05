@@ -212,6 +212,9 @@ function launchStepUp(){
     }
     console.log('beggining', STATE)
 
+    d3.selectAll('.timeline-element').style('opacity', 0.5)
+    d3.select(`#slide-${STATE.targetStep}`).style('opacity', 1)
+
     if (currentSlide().f) { 
         currentSlide().f(); 
     }
@@ -261,12 +264,9 @@ function goToNextStep (){
         .style('left', '0%')
         .on('end', goToTargetStep)
     }
-
 };
 
 function goToPreviousStep (){
-
-
     if(balanced()){
         STATE.targetStep = STATE.targetStep - 1;
         textStory
@@ -286,7 +286,17 @@ function goToPreviousStep (){
 function goToStep(step){
     if(balanced()){
         STATE.targetStep = step;
-        goToTargetStep();
+        textStory
+        .style('left', '0%')
+        .transition().duration(500)
+        .style('left', '-100%')
+        .transition().duration(0)
+        .style('left', '+100%')
+        .on('end', function () { textStory.html(currentSlide().text) })//update text
+        .transition()
+        .duration(500)
+        .style('left', '0%')
+        .on('end', goToTargetStep)    
     };
 };
 
@@ -297,6 +307,12 @@ function hideLandingPageAndStartStory() {
     .style('top', '-200vh')
     .on('end', function(){
         startPage.style('display', 'none')
+
+        timelineContainer
+        .style('opacity', 0)
+        .transition().ease(d3.easeLinear).duration(500)
+        .style('opacity', 1)
+
         d3.select("#text-story-container")
         .style('opacity', '0')
         .transition().ease(d3.easeLinear).duration(500)
@@ -307,11 +323,8 @@ function hideLandingPageAndStartStory() {
     });
 }
 
-function toogleNavBarIfMouseUp(e) {
-    if (e.clientY < 90) {
-        navBar.style('top', '0vh')
-    }
-    else {
-        navBar.style('top', '-10vh')
-    }
+function toogleNavBar() { 
+    navBar.style('top', navBar.style('top') == '0vh' ? '-10vh' : '0vh') 
 }
+
+function hideNavBar() { navBar.style('top', '-10vh') }

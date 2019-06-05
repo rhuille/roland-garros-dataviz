@@ -17,23 +17,26 @@
 
 </head>
 
-<body onmousemove="toogleNavBarIfMouseUp(event)">
+<body>
   <div id="nav-bar">
     <div id=left-container>
-      <img class=logo src='img/ensae.png'>
-      <img class=logo src='img/toucan.png'>
-      <img class=logo src='img/separator.png'>
+
+    </div>
+    <div id=center-container>
       <div>
         <span id=nav-bar-title>Roland Garros : une histoire de champion</span><br>
         <span id=nav-bar-signature>A datavizualisation by Raphael Huille</span>
       </div>
     </div>
     <div id=right-container>
-      <i class="button fas fa-undo-alt"></i>
-      <i class="button far fa-arrow-alt-circle-right"></i>
+      <img class=logo src='img/separator.png'>
+      <img class=logo src='img/ensae.png'>
+      <img class=logo src='img/toucan.png'>
     </div>
   </div>
-  <div id='container'>
+  <div id=nav-bar-shower class="button fas fa-registered" onclick="toogleNavBar()"></div>
+
+  <div id='container' onclick="hideNavBar()">
 
     <div id=start-page>
       <div class=start-page-title>Roland Garros</div>
@@ -45,12 +48,12 @@
       <div id=start-button__container onclick="hideLandingPageAndStartStory()"><span id=start-button>start<span></div>
     </div>
 
-    <div id=timeline></div>
+    
 
-    <div id=text-story-container>
-      <i onclick="goToPreviousStep()" class="button fas fa-angle-left"></i>
-      <div id=textStory></div>
-      <i onclick="goToNextStep()" class="button fas fa-angle-right"></i>
+    <div id=timeline-container>
+      <i onclick="goToPreviousStep()" class="button fas fa-chevron-circle-left"></i>
+      <div id=timeline></div>
+      <i onclick="goToNextStep()" class="button fas fa-chevron-circle-right"></i>
     </div>
 
     <svg id=svg>
@@ -59,6 +62,9 @@
       <g id=time></g>
     </svg>
     <div id=date></div>
+    <div id=text-story-container>
+      <div id=textStory></div>
+    </div>
   </div>
 </body>
 
