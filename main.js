@@ -50,8 +50,6 @@ svg.attr("width", width).attr("height", height);
 // document.getElementById('container').getBoundingClientRect().height
 
 
-
-
 d3.json("data/rolland_.json", (_, data_input) => {
     d3.json("data/position.json", (_, position) => {
         data = augmentData(data_input, position)
@@ -249,7 +247,11 @@ function launchStepUp(){
     }
 }
 
+var __stop__=false;
 function goToTargetStep() {
+        if(__stop__){
+        return;
+    }
     if(STATE.currentStep == 0){
         loadInitialGraph();
     }
@@ -271,6 +273,9 @@ function goToTargetStep() {
 }
 
 function goToNextStep (){
+        if(__stop__){
+        return;
+    }
 
     if(balanced()){
         STATE.targetStep = STATE.targetStep + 1;
@@ -290,6 +295,9 @@ function goToNextStep (){
 };
 
 function goToPreviousStep (){
+        if(__stop__){
+        return;
+    }
     if(balanced()){
         STATE.targetStep = STATE.targetStep - 1;
         textStory
@@ -307,6 +315,9 @@ function goToPreviousStep (){
 };
 
 function goToStep(step){
+        if(__stop__){
+        return;
+    }
     if(balanced()){
         STATE.targetStep = step+1;
         textStory
@@ -319,14 +330,14 @@ function goToStep(step){
         .transition()
         .duration(500)
         .style('left', '0%')
-        .on('end', goToTargetStep)    
+        .on('end', goToTargetStep)  
     };
 };
 
 svg.style('display', 'none')
 function hideLandingPageAndStartStory() {
     svg.style('display', 'unset')
-     bg.transition().duration(1000).style('opacity', 0.3)
+    bg.transition().duration(1000).style('opacity', 0.3)
 
     var durationBlink = 300
     var ease = d3.easeSin
@@ -356,10 +367,15 @@ function hideLandingPageAndStartStory() {
 
     startPage
     .style('top', '0vh')
-    .transition().ease(d3.easeLinear).duration(1000)
+    .transition().ease(d3.easeLinear).duration(500)
     .style('top', '-200vh')
     .on('end', function(){
         startPage.style('display', 'none')
+
+        d3.select(`#slide-0`)
+        .style('opacity', 1)
+        .style('padding', '10px')
+        .style('margin', '0px')
 
         timelineContainer
         .style('opacity', 0)
@@ -371,7 +387,6 @@ function hideLandingPageAndStartStory() {
         .transition().ease(d3.easeLinear).duration(500)
         .style('opacity', '1')
         .on('end', function(){
-            d3.select(`#slide-0`).style('opacity', 1).style('padding', '10px').style('margin', '0px')
             goToStep(0);
         })
     });
@@ -429,13 +444,13 @@ function switchLangue(l) {
         d3.selectAll('.lang-fr').style('display','none')
         currentLangue = 'en'
 
-        goToNextStep()
+        // goToNextStep()
 
     }else{
         d3.selectAll('.lang-fr').style('display','unset')
         d3.selectAll('.lang-en').style('display','none')     
         currentLangue = 'fr'
-        goToNextStep()
+        // goToNextStep()
     }
 }
 
