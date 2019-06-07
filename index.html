@@ -11,49 +11,87 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
   <script type="text/javascript" src="d3.v4.js"></script> <!-- https://d3js.org/ -->
   <link rel="stylesheet" type="text/css" href="style.css">
 
 </head>
 
 <body>
+  <div id=bg></div>
   <div id="nav-bar">
     <div id=left-container>
-
+      <img class="logo img_link" src='img/ensae.png' onclick="open_ensae()">
+      &nbsp
+      <img class="logo img_link" src='img/toucan.png' onclick="open_toucan()">
+      &nbsp
+      <img class=logo src='img/separator.png'>
+      <div class=lang-fr>
+        <span id=nav-bar-title>Roland Garros : une histoire de champion</span><br>
+        <span id=nav-bar-signature>Une datavizualisation <a target="_blank" href="https://www.linkedin.com/in/raphael-huille">par Raphael Huille </a></span>
+      </div>
+      <div class=lang-en>
+        <span id=nav-bar-title>Roland Garros : a story of champions</span><br>
+        <span id=nav-bar-signature>A datavizualisation <a target="_blank" href="https://www.linkedin.com/in/raphael-huille">by Raphael Huille </a></span>
+      </div>
     </div>
     <div id=center-container>
-      <div>
-        <span id=nav-bar-title>Roland Garros : une histoire de champion</span><br>
-        <span id=nav-bar-signature>A datavizualisation by Raphael Huille</span>
+    </div>
+    <div id=right-container class=lang-fr>
+      <div id=feedback onclick="giveMeFeedBack()">Donnez moi votre avis &nbsp <i class="far fa-envelope"></i></div>
+      <div id=langSwitcher>
+        <span class=swicther onclick="switchLangue('en')">en</span> 
+        <span class=swicther onclick="switchLangue('fr')">fr</span>
       </div>
     </div>
-    <div id=right-container>
-      <img class=logo src='img/separator.png'>
-      <img class=logo src='img/ensae.png'>
-      <img class=logo src='img/toucan.png'>
-    </div>
-  </div>
-  <div id=nav-bar-shower class="button fas fa-registered" onclick="toogleNavBar()"></div>
-
-  <div id='container' onclick="hideNavBar()">
-
-    <div id=start-page>
-      <div class=start-page-title>Roland Garros</div>
-      <div class=start-page-title> Une histoire de champion</div>
-      <div id=sep></div>
-      <div id=start-page-subtitle>Une vizualisation interactive des hommes et des matchs qui ont marqué le tournois.
+    <div id=right-container class=lang-en>
+      <div id=feedback onclick="giveMeFeedBack()">Give me feedback <i class="far fa-envelope"></i></div>
+      <div id=langSwitcher>
+        <span class=swicther onclick="switchLangue('en')">en</span> 
+        <span class=swicther onclick="switchLangue('fr')">fr</span>
       </div>
-      <div id=start-page-signature>By Raphael Huille</div>
-      <div id=start-button__container onclick="hideLandingPageAndStartStory()"><span id=start-button>start<span></div>
     </div>
-
     
+  </div>
+
+  <div id=nav-bar-shower-container class="button" onclick="toogleNavBar()">
+    <div id=nav-bar-shower></div>
+    <div id=flag></div>
+  </div>
+
+  <i class="fas fa-info-circle" id=info-opener></i>
+  <div id='container' onclick="hideNavBar(); toogleInfoVisibility()">
+
+    <div id=start-page onclick="toogleInfoVisibility()">
+      <div class=start-page-title>Roland Garros</div>
+      <div class="lang-fr start-page-title"> Une histoire de champion</div>
+      <div class="lang-en start-page-title">A story of champions</div>
+      <div id=sep></div>
+      <div class=lang-fr id=start-page-subtitle>Une vizualisation interactive des hommes et des matchs qui ont marqué le tournois.
+      </div>
+      <div class=lang-en id=start-page-subtitle-en>An interactive data vizualisation of men and matches that made the tournament.
+      </div>
+      <div id=start-page-signature>
+        <a target="_blank" href="https://www.linkedin.com/in/raphael-huille">
+        <span class=lang-fr>Par</span>
+        <span class=lang-en>By</span> 
+        Raphael Huille
+        </a>
+      </div>
+      <div id=start-button__container onclick="hideLandingPageAndStartStory()">
+        <span class=lang-fr id=start-button>Commencer</span>
+        <span class=lang-en id=start-button-en>Start</span>
+      </div>
+    </div>
 
     <div id=timeline-container>
-      <i onclick="goToPreviousStep()" class="button fas fa-chevron-circle-left"></i>
+      <i id=go-to-previous onclick="goToPreviousStep()" class="button fas fa-chevron-circle-left"></i>
       <div id=timeline></div>
-      <i onclick="goToNextStep()" class="button fas fa-chevron-circle-right"></i>
+      <i id=go-to-next onclick="goToNextStep()" class="button fas fa-chevron-circle-right"></i>
+    </div>
+
+    <div id=text-story-container>
+      <div id=textStory></div>
     </div>
 
     <svg id=svg>
@@ -61,12 +99,13 @@
       <g id=tooltips></g>
       <g id=time></g>
     </svg>
-    <div id=date></div>
-    <div id=text-story-container>
-      <div id=textStory></div>
-    </div>
+
+  </div>
+
+  <div id=info>
   </div>
 </body>
+
 
 <script type="text/javascript" src="selectDomElement.js"></script>
 

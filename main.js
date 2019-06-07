@@ -1,8 +1,8 @@
 
 
 // parameters
-var width = document.getElementById('container').offsetWidth,
-    height = window.screen.height - 240,
+var width = window.innerWidth,
+    height = window.innerHeight-50,
     dateFrom = 2005,
     dateTo = 2017,
     strength = 40,
@@ -15,8 +15,41 @@ var width = document.getElementById('container').offsetWidth,
     pseudoDateFrom = dateFrom,
     pseudoDateTo = dateTo;
 
+
+var language = window.navigator.userLanguage || window.navigator.language;
 var data;
 var scaleRadius, scaleColor, scaleWidth;
+
+
+window.onresize = function(event) {
+    width = window.innerWidth,
+    height = window.innerHeight-50,
+
+    container
+    .style('height', window.innerHeight+'px')
+
+    d3
+    .select('#bg')
+    .style('width', window.innerWidth + 'px')
+    .style('height', window.innerHeight + 'px')
+
+    svg.attr("width", width)
+    .attr("height", height);
+};
+
+container
+.style('height', window.innerHeight+'px')
+
+d3
+.select('#bg')
+.style('width', window.innerWidth + 'px')
+.style('height', window.innerHeight + 'px')
+
+svg.attr("width", width).attr("height", height);
+
+// document.getElementById('container').getBoundingClientRect().height
+
+
 
 
 d3.json("data/rolland_.json", (_, data_input) => {
@@ -49,30 +82,6 @@ d3.json("data/rolland_.json", (_, data_input) => {
     });
 });
 
-// var goToEnd = d3.select("#container")
-//     .append('span')
-//     .attr('id', 'goToEnd')
-//     .style('color', 'rgba(0, 0, 0, 0)')
-//     .html('&#8631')
-//     .on('click', function () {
-//         svg.attr("width", width).attr("height", height);
-//         counter = story.length;
-//         fleche.interrupt();
-//         textStory.html('')
-//         textStory.selectAll().remove();
-//         goToEndF();
-//     })
-
-
-// var info = d3.select("#container")
-//     .append("div")
-//     .attr('id', 'info').html("&nbsp");
-
-// var signature = d3.select("#container")
-//     .append("div")
-//     .attr('id', 'signature');
-
-
 var simulation = d3.forceSimulation()
     .force("link", d3.forceLink().id(function (d) { return d.id }))
     .force('collide', d3.forceCollide(10))
@@ -104,9 +113,12 @@ function augmentData(data, position){
 
 function loadInitialGraph(){
     console.log('loadInitialGraph')
-    graph.selectAll('line').remove()
-    graph.selectAll('circle').remove()
-    tooltips.selectAll('g').remove()
+    graph.selectAll('*').remove()
+    tooltips.selectAll('*').remove()
+    time.selectAll('*').remove()
+    dateFrom = 2005;
+    dateTo = 2017;
+    date.html('')
 
     graph
     .selectAll('line')
@@ -121,6 +133,8 @@ function loadInitialGraph(){
     .attr("x2", function (d) { return d.target.x; })
     .attr("y2", function (d) { return d.target.y; })
     .attr('opacity', 0)
+    .on('mouseover', linkMouseOver)
+    .on('mouseout', MouseOut)
 
     graph
     .selectAll('circle')
@@ -134,6 +148,8 @@ function loadInitialGraph(){
     .attr('r', 0)
     .attr('fill', 'black')
     .attr('opacity', 0)
+    .on('mouseover', function () { nodeMouseOver(d3.select(this)) })
+    .on('mouseout', MouseOut)
 
     center();
 }
@@ -184,7 +200,10 @@ let STATE = {
 
 // computed
 function jump (){
-    if((STATE.targetStep - STATE.currentStep) == 1){
+    if(STATE.targetStep == STATE.currentStep){
+        return 0.2
+    }
+    else if((STATE.targetStep - STATE.currentStep) == 1){
         return 0.5
     }else{
         return 0
@@ -199,6 +218,8 @@ function currentSlide(){
     return story[STATE.currentStep]
 }
 
+
+
 // method
 function launchStepUp(){
     if(STATE.currentStep > STATE.targetStep + 1){
@@ -208,12 +229,14 @@ function launchStepUp(){
     if(STATE.currentStep == STATE.targetStep + 1){
         console.warn('oups : one step up...')
         STATE.currentStep = STATE.targetStep;
+        d3.selectAll('.timeline-element').style('opacity', 0.5).style('padding', '5px').style('margin', '5px')
+        d3.select(`#slide-${STATE.targetStep-1}`).style('opacity', 1).style('padding', '10px').style('margin', '0px')
         return undefined;
     }
     console.log('beggining', STATE)
 
-    d3.selectAll('.timeline-element').style('opacity', 0.5)
-    d3.select(`#slide-${STATE.targetStep}`).style('opacity', 1)
+    d3.selectAll('.timeline-element').style('opacity', 0.5).style('padding', '5px').style('margin', '5px')
+    d3.select(`#slide-${STATE.targetStep-1}`).style('opacity', 1).style('padding', '10px').style('margin', '0px')
 
     if (currentSlide().f) { 
         currentSlide().f(); 
@@ -258,7 +281,7 @@ function goToNextStep (){
         .style('left', '-100%')
         .transition().duration(0)
         .style('left', '+100%')
-        .on('end', function () { textStory.html(currentSlide().text) })//update text
+        .on('end', function () { textStory.html(story[STATE.targetStep-1][`text_${currentLangue}`]) })//update text
         .transition()
         .duration(500)
         .style('left', '0%')
@@ -275,7 +298,7 @@ function goToPreviousStep (){
         .style('left', '+100%')
         .transition().duration(0)
         .style('left', '-100%')
-        .on('end', function () { textStory.html(currentSlide().text) })//update text
+        .on('end', function () { textStory.html(story[STATE.targetStep-1][`text_${currentLangue}`]) })//update text
         .transition()
         .duration(500)
         .style('left', '0%')
@@ -285,14 +308,14 @@ function goToPreviousStep (){
 
 function goToStep(step){
     if(balanced()){
-        STATE.targetStep = step;
+        STATE.targetStep = step+1;
         textStory
         .style('left', '0%')
         .transition().duration(500)
         .style('left', '-100%')
         .transition().duration(0)
         .style('left', '+100%')
-        .on('end', function () { textStory.html(currentSlide().text) })//update text
+        .on('end', function () { textStory.html(story[STATE.targetStep-1][`text_${currentLangue}`]) })//update text
         .transition()
         .duration(500)
         .style('left', '0%')
@@ -300,7 +323,37 @@ function goToStep(step){
     };
 };
 
+svg.style('display', 'none')
 function hideLandingPageAndStartStory() {
+    svg.style('display', 'unset')
+     bg.transition().duration(1000).style('opacity', 0.3)
+
+    var durationBlink = 300
+    var ease = d3.easeSin
+    d3.select("#go-to-next")
+    .style('font-size', '4vmax')
+    .transition()
+    .delay(6000)
+    .on('start', function(){
+        if (STATE.currentStep == 1){
+            d3.select("#go-to-next")
+            .style('font-size', '4vmax')
+            .transition().duration(durationBlink).ease(ease)
+            .style('font-size', '6vmax')
+            .transition().duration(durationBlink).ease(ease)
+            .style('font-size', '4vmax')
+            .transition().duration(durationBlink).ease(ease)
+            .style('font-size', '6vmax')
+            .transition().duration(durationBlink).ease(ease)
+            .style('font-size', '4vmax')
+            .transition().duration(durationBlink).ease(ease)
+            .style('font-size', '6vmax')
+            .transition().duration(durationBlink).ease(ease)
+            .style('font-size', '4vmax')
+        }
+    })
+
+
     startPage
     .style('top', '0vh')
     .transition().ease(d3.easeLinear).duration(1000)
@@ -318,13 +371,77 @@ function hideLandingPageAndStartStory() {
         .transition().ease(d3.easeLinear).duration(500)
         .style('opacity', '1')
         .on('end', function(){
-            goToNextStep();
+            d3.select(`#slide-0`).style('opacity', 1).style('padding', '10px').style('margin', '0px')
+            goToStep(0);
         })
     });
 }
 
-function toogleNavBar() { 
-    navBar.style('top', navBar.style('top') == '0vh' ? '-10vh' : '0vh') 
+function toogleNavBar() {
+    if(navBar.style('top') == '0vh' ){
+        navBar.style('top', '-11vh')
+        d3.select('#nav-bar-shower-container').style('top','-2vh')
+    }else{
+        navBar.style('top', '0vh')
+        d3.select('#nav-bar-shower-container').style('top', '9vh')
+    }
 }
 
-function hideNavBar() { navBar.style('top', '-10vh') }
+
+function hideNavBar() {
+    navBar.style('top', '-11vh')
+    d3.select('#nav-bar-shower-container').style('top', '-2vh')
+}
+
+open_ensae = function(){
+    window.open('https://www.ensae.fr/','_blank')
+}
+
+open_toucan = function(){
+    window.open('https://toucantoco.com/','_blank')
+}
+
+
+function giveMeFeedBack() {
+    
+    info.transition().duration(500).style('opacity', '1').on('end', function(){
+        container.style('filter', 'blur(2px)')
+    })
+    info.style('display', 'unset');
+    info.html("My mail addresse: ")
+
+    info
+    .append('span')
+    .attr('id', 'close-time')
+    .append('i')
+    .attr('class', 'fas fa-times')
+    .on('click', toogleInfoVisibility)
+    
+    bg.transition().duration(200).style('opacity', 1)
+
+    wait = true
+}
+
+
+function switchLangue(l) {
+    if(l=='en'){
+        d3.selectAll('.lang-en').style('display', 'unset')
+        d3.selectAll('.lang-fr').style('display','none')
+        currentLangue = 'en'
+
+        goToNextStep()
+
+    }else{
+        d3.selectAll('.lang-fr').style('display','unset')
+        d3.selectAll('.lang-en').style('display','none')     
+        currentLangue = 'fr'
+        goToNextStep()
+    }
+}
+
+
+if(language.includes('en')){
+    switchLangue('en')
+}else{
+    switchLangue('fr')
+}

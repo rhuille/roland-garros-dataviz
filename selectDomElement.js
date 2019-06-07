@@ -3,6 +3,8 @@
 
 var navBar = d3.select("#nav-bar")
 var navBarShower = d3.select("#nav-bar-shower")
+
+bg = d3.select('#bg')
 var container = d3.select("#container")
 
   var startPage = d3.select("#start-page")
@@ -20,6 +22,7 @@ var container = d3.select("#container")
   
   var date = d3.select("#date");
 
+info = d3.select("#info")
 
 /**********/
 

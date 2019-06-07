@@ -5,12 +5,57 @@ var jump = 0.1;
 const story = [
   {
     'text': "Les internationaux de France Simple Messieurs - Rolland Garros - <br> est un tournois de tennis parmis les plus prestigieux du monde <br> C'est une longue épopée de champions s'affrontant au tennis sur terre battue ! ",
-    'f': function () {}
+    'f': function () {
+
+      img_intoContainer = textStory
+      .append('div')
+      .attr('id', 'img_into-container')
+
+      img_intoContainer
+      .style('opacity', 0)
+      .transition().duration(500)
+      .style('opacity', 1)
+
+      img_intoContainer.append('div')
+      .attr('id', 'img_into-container-left')
+
+      img_intoContainer.append('div')
+      .attr('id', 'img_into-container-right')
+
+      img_intoContainer
+      .append('img')
+      .attr('src', 'players_img/GASQUET.jpg')
+      .attr('class', 'img_intro')
+
+      img_intoContainer
+      .append('img')
+      .attr('src', 'players_img/NOAH.jpg')
+      .attr('class', 'img_intro')
+      
+      img_intoContainer
+      .append('img')
+      .attr('src', 'players_img/NADAL.jpg')
+      .attr('class', 'img_intro')
+
+      img_intoContainer
+      .append('img')
+      .attr('src', 'players_img/BORG.jpg')
+      .attr('class', 'img_intro')
+
+      img_intoContainer
+      .append('img')
+      .attr('src', 'players_img/DJOKOVIC.jpg')
+      .attr('class', 'img_intro')
+
+      // document.getElementById('img_into-container').scrollIntoView();
+
+    }
   },
   {
     'text': 'Considérons un point qui représentera Rafael Nadal <br>   &nbsp',
     'f': function () {
-      svg.attr("width", width).attr("height", height);
+      
+      img_intoContainer.remove()
 
       graph.select('#NADAL')
         .transition()
@@ -18,7 +63,7 @@ const story = [
         .attr('r', 5)
         .attr('fill', 'black')
         .attr('opacity', 1)
-        .on('end', function () { stop = 0; nodeMouseOver(d3.select(this)); })
+        .on('end', function () {  nodeMouseOver(d3.select(this));})
     }
   },
 
@@ -28,7 +73,7 @@ const story = [
       graph.select('#NADAL')
         .transition().duration(500 * jump)
         .attr('r', function (d) { return scaleRadius(participation(d)) })
-        .on('end', function () { stop = 0; })
+        .on('end', function () {  })
     }
   },
 
@@ -38,7 +83,7 @@ const story = [
       graph.select('#NADAL')
         .transition().duration(500 * jump)
         .attr('fill', function (d) { return scaleColor(ratio(d)) })
-        .on('end', function () { stop = 0; })
+        .on('end', function () {  })
     }
   },
 
@@ -50,7 +95,7 @@ const story = [
         .attr('r', 5)
         .attr('fill', 'black')
         .attr('opacity', 1)
-        .on('end', function () { stop = 0; nodeMouseOver(d3.select(this)); })
+        .on('end', function () {  nodeMouseOver(d3.select(this));})
     }
   },
   {
@@ -59,7 +104,7 @@ const story = [
       graph.select('#MURRAY')
         .transition().duration(500 * jump)
         .attr('r', function (d) { return scaleRadius(participation(d)) })
-        .on('end', function () { stop = 0; })
+        .on('end', function () {  })
     }
   },
 
@@ -69,14 +114,13 @@ const story = [
       graph.select('#MURRAY')
         .transition().duration(500 * jump)
         .attr('fill', function (d) { return scaleColor(ratio(d)) })
-        .on('end', function () { stop = 0; })
     }
   },
 
 
   {
     'text': " <strong> Le rayon du point </strong> est proportionel est nombre d'année ou le joueur a atteind les quarts de final  <br><strong> L'intensité de la couleur </strong> du point est proportionel au taux de victoire du joueur ",
-    'f': function () { stop = 0; }
+    'f': function () {  }
   },
 
   {
@@ -88,42 +132,7 @@ const story = [
         .attr('r', function (d) { return scaleRadius(participation(d)) })
         .attr('opacity', 1)
         .attr('fill', function (d) { return scaleColor(ratio(d)) })
-        .on('end', function () {
-          // **********//
-
-          stop = 0;
-
-          var d = d3.select(this).datum(),
-            x = x_ + d.x + 10, y = y_ + d.y - 30;
-
-          tooltip = tooltips.append('g').attr('transform', 'translate(' + x + ',' + y + ')')
-
-          tooltip.append('rect')
-            .attr('class', 'tooltip')
-            .attr('fill', 'black')
-            .attr('height', 30)
-            .attr('width', l(d.id.length))
-            .attr('y', -21)
-            .attr('x', - 50)
-            .attr('rx', 5).attr('ry', 5)
-            .attr('opacity', 0)
-            .transition().duration(400)
-            .attr('opacity', 1)
-
-          tooltip.append('text')
-            .attr('class', 'tooltip')
-            .attr('text-anchor', 'middle')
-            .attr('fill', 'black')
-            .text(d.id)
-            .attr('fill', 'white')
-            .attr('x', l(d.id.length) * 0.5 - 50)
-            .attr('textLength', l(d.id.length) * 0.9)
-            .attr('opacity', 0)
-            .transition().duration(400)
-            .attr('opacity', 1)
-          // **********//
-
-        })
+        .on('end', function () {  nodeMouseOver(d3.select(this));})
     }
   },
 
@@ -136,7 +145,7 @@ const story = [
         .attr('r', function (d) { return scaleRadius(participation(d)) })
         .attr('opacity', 1)
         .attr('fill', function (d) { return scaleColor(ratio(d)) })
-        .on('end', function () { stop = 0; nodeMouseOver(d3.select(this)); })
+        .on('end', function () {  nodeMouseOver(d3.select(this));})
 
     }
   },
@@ -145,11 +154,11 @@ const story = [
     'text': "Pour representer les matchs entre ces joueurs, on dessine des liens entre les points. <br> Voici le lien entre Federer et Nadal",
     'f': function () {
 
-      MouseOut();
+      removeTooltip();
       graph.select('#FEDERERNADAL')
         .transition().duration(500 * jump)
         .attr('opacity', 1)
-        .on('end', function () { stop = 0; })
+        .on('end', function () {  })
     }
   },
 
@@ -161,7 +170,7 @@ const story = [
       graph.select('#MURRAYNADAL')
         .transition().duration(500 * jump)
         .attr('opacity', 1)
-        .on('end', function () { stop = 0; })
+        .on('end', function () {  })
     }
   },
 
@@ -172,7 +181,7 @@ const story = [
       graph.select('#GASQUETMURRAY')
         .transition().duration(500 * jump)
         .attr('opacity', 1)
-        .on('end', function () { stop = 0; })
+        .on('end', function () {  })
     }
   },
 
@@ -182,7 +191,7 @@ const story = [
 
       loadTime(data_);
 
-      MouseOut();
+      removeTooltip();
 
       graph.selectAll('.nodes').filter(function (d) { return (participation(d) > 0) })
         .transition()
@@ -190,7 +199,7 @@ const story = [
         .attr('r', function (d) { return scaleRadius(participation(d)) })
         .attr('fill', function (d) { return scaleColor(ratio(d)) })
         .attr('opacity', 1)
-        .on('end', function () { stop = 0; })
+        .on('end', function () {  })
 
     }
   },
@@ -204,52 +213,50 @@ const story = [
         .duration(2000 * jump)
         .attr('stroke-width', function (d) { return scaleWidth(games(d)) })
         .attr('opacity', 1)
-        .on('end', function () { stop = 0; })
+        .on('end', function () {  })
     }
   },
 
   {
     'text': "On voit se démarquer Rafael Nadal, le grand champion de Rolland Garros. <br> Il n'a perdu qu'une seule fois après les quarts de final ! ",
-    'f': function () { look('NADAL'); stop = 0; }
+    'f': function () { look('NADAL'); }
   },
 
   {
     'text': "Notez Federer et Djokovic deux autres grands joueurs, mais au taux de victoire plus faible<br>  &nbsp",
-    'f': function () { look('FEDERER'); look('DJOKOVIC'); stop = 0; }
+    'f': function () { look('FEDERER');look('DJOKOVIC'); }
   },
 
   {
     'text': "Wavrinka, vainqueur en 2015, qui a un bon taux de victoire mais peut de participation<br>  &nbsp",
-    'f': function () { restore('NADAL'); restore('FEDERER'); restore('DJOKOVIC'); look('WAWRINKA'); stop = 0; }
+    'f': function () { restore('NADAL');restore('FEDERER');restore('DJOKOVIC');look('WAWRINKA'); }
   },
 
   {
     'text': "Le français Gael Monfils, qui a été éliminé 3 fois en quart de final et une fois en demi finale<br>  &nbsp",
-    'f': function () { restore('WAWRINKA'); look('MONFILS'); stop = 0; }
+    'f': function () { restore('WAWRINKA');look('MONFILS'); }
   },
 
 
   {
     'text': "Vous pouvez explorer le graph en passant la souris sur les points et les liens <br>  pour faire apparaire le nom du joueurs",
     'f': function () {
-      restore('MONFILS');
-      graph.selectAll('.nodes').filter(function (d) { return (participation(d) > 0) })
-        .on('mouseover', function () { nodeMouseOver(d3.select(this)) })
+      MouseOut()
+      // graph.selectAll('.nodes').filter(function (d) { return (participation(d) > 0) })
+      //   .on('mouseover', function () { nodeMouseOver(d3.select(this)) })
 
-      graph.selectAll('.nodes').filter(function (d) { return (participation(d) > 0) })
-        .on('mouseout', MouseOut)
+      // graph.selectAll('.nodes').filter(function (d) { return (participation(d) > 0) })
+      //   .on('mouseout', MouseOut)
 
-      graph.selectAll('.links').filter(function (d) { return (games(d) > 0) })
-        .on('mouseover', function () { linkMouseOver(d3.select(this)) })
+      // graph.selectAll('.links').filter(function (d) { return (games(d) > 0) })
+      //   .on('mouseover', function () { linkMouseOver(d3.select(this)) })
 
-      graph.selectAll('.links').filter(function (d) { return (games(d) > 0) })
-        .on('mouseout', MouseOut)
-      stop = 0;
+      // graph.selectAll('.links').filter(function (d) { return (games(d) > 0) })
+      //   .on('mouseout', MouseOut)
+      
     }
 
   },
-
-
   {
     'text': "Maintenant on va animer le graphe pour voir <strong>l'évolution</strong> des joueurs depuis 2005 <br> Cliquez sur la flèche pour lancer l'animation",
     'f': function () {
@@ -265,7 +272,7 @@ const story = [
       d3.select('#NADAL').style('stroke-width', 3)
       d3.select('#FEDERER').style('stroke-width', 3)
       d3.select('#DJOKOVIC').style('stroke-width', 3)
-      evolution(2018); stop = 0;
+      evolution(2018);
     }
   },
 
@@ -285,17 +292,17 @@ const story = [
   {
     'text': " Ainsi Borg a déjà remporté 6 fois Rolland Garros. <br> Ces données ne sont pas disponibles, cela n'est donc pas visible sur la taille du point représentant Borg ",
     'f': function () {
-      look('BORG'); stop = 0;
+      look('BORG');
     }
   },
 
   {
     'text': "Notez qu'en 1983 le français Yannik Noah remporte le tournois ! <br> &nbsp  ",
     'f': function () {
-      MouseOut();
+      removeTooltip();
       restore('BORG');
 
-      d3.select('#NOAH').transition().duration(1000).style('stroke-width', 3).on('end', function () { stop = 0; })
+      d3.select('#NOAH').transition().duration(1000).style('stroke-width', 3).on('end', function () {  })
       nodeMouseOver(d3.select('#NOAH'));
 
       evolution(1984);
@@ -307,22 +314,22 @@ const story = [
     'text': "On va faire avancer le temps. Une nouvelle génération va apparaitre. <br> observez l'émergence de Lendl, Willander et Connors",
     'f': function () {
 
-      MouseOut();
-      d3.select('#NOAH').transition().duration(1000).style('stroke-width', 0).on('end', function () { stop = 0; })
-      look('LENDL'); look('CONNORS'); look('WILANDER');
+      removeTooltip();
+      d3.select('#NOAH').transition().duration(1000).style('stroke-width', 0).on('end', function () {  })
+      look('LENDL');look('CONNORS');look('WILANDER');
     }
   },
 
   {
     'text': "Notez comment le graph va s'étendre progressivement vers la droite... <br> &nbsp  ",
     'f': function () {
-      MouseOut();
+      removeTooltip();
 
-      restore('LENDL'); restore('CONNORS'); restore('WILANDER');
+      restore('LENDL');restore('CONNORS');restore('WILANDER');
       d3.select('#LENDL').style('stroke-width', 3)
       d3.select('#CONNORS').style('stroke-width', 3)
       d3.select('#WILANDER').style('stroke-width', 3)
-      evolution(1989); stop = 0;
+      evolution(1989);
 
     }
   },
@@ -337,23 +344,23 @@ const story = [
   {
     'text': "Muster et Kafelnikov ont participé 3 fois et remporté une seule fois chacun <br> &nbsp",
     'f': function () {
-      look('MUSTER'); look('KAFELNIKOV'); stop = 0;
+      look('MUSTER');look('KAFELNIKOV');
     }
   },
 
   {
     'text': "Et puis Courier et Bruguera : <br> vainqueur 2 fois chacun",
     'f': function () {
-      restore('MUSTER'); restore('KAFELNIKOV');
-      look('COURIER'); look('BRUGUERA'); stop = 0;
+      restore('MUSTER');restore('KAFELNIKOV');
+      look('COURIER');look('BRUGUERA');
     }
   },
 
   {
     'text': "Il n'y a pas de 'gros' joueurs, c'est à dire des joueurs revenant régulièrement en phase finale <br> &nbsp",
     'f': function () {
-      MouseOut();
-      restore('COURIER'); restore('BRUGUERA'); stop = 0;
+      removeTooltip();
+      restore('COURIER');restore('BRUGUERA');
 
     }
   },
@@ -361,7 +368,7 @@ const story = [
   {
     'text': "C'est toujours le cas si on regarde jusqu'en 2004 <br> &nbsp ",
     'f': function () {
-      evolution(2004); stop = 0;
+      evolution(2004);
       graph.selectAll('.nodes').filter(function (d) { return (participation(d) > 0) })
         .on('mouseover', function () { nodeMouseOver(d3.select(this)) })
 
@@ -373,14 +380,14 @@ const story = [
   {
     'text': "Regardez Agassi : il a joué en 1988 contre Wilander en quart, et en 2003 (15 ans après !) contre Corras <br> Il a beaucoup participé mais sur une très longue perdiode de temps.",
     'f': function () {
-      look('AGASSI'); stop = 0;
+      look('AGASSI');
     }
   },
 
   {
     'text': "Et ici Federer <br> encore un petit point car il n'a joué qu'une seule fois en 2001",
     'f': function () {
-      restore('AGASSI'); look('FEDERER'); stop = 0;
+      restore('AGASSI');look('FEDERER');
     }
   },
 
@@ -439,22 +446,20 @@ const story = [
 
 
 function evolution(x) {
-  // fleche.on('click', function () { })
-  d3.select('body').on('keydown', function () { })
-
-  svg.transition().duration(1000)
+  if (jump()==0){
+    dateTo = x;
+    update();
+    updateTime();
+    return;
+  }
+  svg.transition().duration(2000*jump())
     .on('end', function () {
       dateTo++;
       if (dateTo < x) {
         update();
         updateTime();
-        // svg.append('text').text(dateTo).attr('oppacity', 0.8).attr('transform', 'scale(5)')
         evolution(x);
       }
-      // else {
-      //   // fleche.on('click', go)
-      //   d3.select('body').on('keydown', go)
-      // }
     })
 }
 
@@ -462,14 +467,14 @@ function evolution(x) {
 function update() {
 
   graph.selectAll('.nodes')
-    .transition().duration(500)
+    .transition().duration(1000*jump())
     .attr('r', function (d) { return scaleRadius(participation(d)) })
     .attr('fill', function (d) { return scaleColor(ratio(d)) })
     .attr('opacity', function (d) { return participation(d) + 0 })
-    .on('end', function () { stop = 0; })
+    .on('end', function () {  })
 
   graph.selectAll('.links')
-    .transition().duration(500)
+    .transition().duration(1000*jump())
     .attr('stroke-width', function (d) { return scaleWidth(games(d)) })
     .attr('opacity', function (d) { return games(d) + 0 })
 
@@ -480,31 +485,24 @@ function update() {
 function look(name) {
   var n = d3.select('#' + name);
 
-  n.transition().duration(1000).style('stroke-width', 3)
+  n.transition().duration(1000*jump()).style('stroke-width', 3)
     .on('interrupt', function () { d3.select(this).style('stroke-width', 3) })
 
-  n.transition().delay(1000).duration(1000).style('stroke-width', 0)
+  n.transition().delay(1000*jump()).duration(1000).style('stroke-width', 0)
     .on('interrupt', function () { d3.select(this).style('stroke-width', 0) })
 
-  n.transition().delay(2000).duration(1000).style('stroke-width', 3)
+  n.transition().delay(2000*jump()).duration(1000).style('stroke-width', 3)
     .on('interrupt', function () { d3.select(this).style('stroke-width', 3) })
   //xx = n.datum().x,
   //yy = n.datum().y;
 
-  tooltips = svg.append('g');
   nodeMouseOver(n);
 }
 
 
 function restore(name) {
-  var n = d3.select('#' + name);
-
-  n.transition().duration(0).style('stroke-width', 0)
-    .on('interrupt', function () { d3.select(this).style('stroke-width', 0) })
-
-
-  tooltips = svg.append('g');
-  MouseOut();
+  d3.select('#' + name).style('stroke-width', 0)
+  removeTooltip();
 }
 
 
@@ -516,10 +514,11 @@ function goToEndF() {
   updateTime();
   update();
 
-  tooltips = svg.append('g');
+  d3.selectAll('.nodes').style('cursor', 'pointer')
+  d3.selectAll('.links').style('cursor', 'pointer')
 
-  svg.transition().delay(1000).on('start', function () {
-    simulation.nodes(data.nodes).on("tick", ticked); // from ticked.js
+  svg.transition().delay(1000*jump()).on('start', function () {
+    simulation.nodes(data.nodes).on("tick", ticked);// from ticked.js
     simulation.force("link").links(data.links);
     simulation.alphaTarget(0.1).restart();
   })
@@ -528,21 +527,59 @@ function goToEndF() {
       time.select('#from').call(dragTime);
       time.select('#to').call(dragTime);
 
-      graph.selectAll('.nodes').on('mouseover', function () { nodeMouseOver(d3.select(this)) })
-      graph.selectAll('.nodes').on('mouseout', MouseOut)
-
-      graph.selectAll('.links').on('mouseover', linkMouseOver)
-      graph.selectAll('.links').on('mouseout', MouseOut)
-
-
-      graph.selectAll('.nodes').on('click', clickNode)
-      graph.selectAll('.links').on('click', clickLink)
+      graph.selectAll('.nodes').on('click', clickNodeV2)
+      graph.selectAll('.links').on('click', clickLinkV2)
 
       graph.selectAll('.nodes').call(drag)
 
     })
 
-  var heightIcon = 50;
+  textStory
+  .transition()
+  .duration(500)
+  .delay(3000)
+  .style('left', '-100%').on('end', function(){
+    
+    var durationBlink = 300;
+    var ease = d3.easeSin;
+    d3.select('#info-opener')
+    .transition().duration(durationBlink)
+    .style('opacity', 1)
+    .style('font-size', '2vmax')
+    .transition().duration(durationBlink).ease(ease).delay(500)
+    .style('font-size', '5vmax')
+    .transition().duration(durationBlink).ease(ease)
+    .style('font-size', '2vmax')
+    .transition().duration(durationBlink).ease(ease)
+    .style('font-size', '4vmax')
+    .transition().duration(durationBlink).ease(ease)
+    .style('font-size', '2vmax')
+    .transition().duration(durationBlink).ease(ease)
+    .style('font-size', '3vmax')
+    .transition().duration(durationBlink).ease(ease)
+    .style('font-size', '2vmax')
+    
+    d3.select('#info-opener').on('click', function(){
+      info.transition().duration(500).style('opacity', '1').on('end', function(){
+        container.style('filter', 'blur(2px)')
+      })
+      info.style('display', 'unset');
+      info.html('Cette vizualisation est interactive !<br>\
+      Déplacez les points  et cliquez dessus:<br>\
+      <img src="tutos/moove.gif"></img><br>\
+      Changez la date:<br>\
+      <img src="tutos/video.gif"></img>'
+       )
+
+      info
+      .append('span')
+      .attr('id', 'close-time')
+      .append('i')
+      .attr('class', 'fas fa-times')
+      .on('click', toogleInfoVisibility)
+
+      wait = true;
+    })
+
+  })
 }
-
-
