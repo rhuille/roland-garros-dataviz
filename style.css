@@ -205,7 +205,7 @@ body {
 #timeline {
     display: flex;
     padding: 40px 10px;
-    overflow: scroll;
+    overflow-x: scroll;
 }
 
 .timeline-element {
