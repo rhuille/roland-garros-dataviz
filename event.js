@@ -130,7 +130,12 @@ clickLinkV2 = function(d){
   });
   info.style('display', 'unset');
   info.html(displayInfoLink(d))
-  info.append('i').attr('class', 'fas fa-times').on('click', toogleInfoVisibility)
+  info
+  .append('span')
+  .attr('id', 'close-time')
+  .append('i')
+  .attr('class', 'fas fa-times')
+  .on('click', toogleInfoVisibility)
 
   bg.transition().duration(200).style('opacity', 1)
   wait = true
@@ -253,7 +258,7 @@ toogleInfoVisibility = function(){
     container.style('filter', 'unset')
 
     if (STATE.currentStep>=1){
-      bg.transition().duration(500).style('opacity', 0.3)
+      bg.transition().duration(500).style('opacity', 0.5)
       
     }
   }

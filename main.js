@@ -68,7 +68,7 @@ d3.json("data/rolland_.json", (_, data_input) => {
             d3.min(data.nodes, function (d) { return d3.sum(d.victory) / (d3.sum(d.victory) + d3.sum(d.defeat)) }),
             d3.max(data.nodes, function (d) { return d3.sum(d.victory) / (d3.sum(d.victory) + d3.sum(d.defeat)) })
         ])
-        .range(["#FFFFFF", "#f4c838"]);
+        .range(["#FFFFFF", "#e6b800"]);
 
         scaleWidth = d3
         .scaleLinear()
@@ -337,7 +337,7 @@ function goToStep(step){
 svg.style('display', 'none')
 function hideLandingPageAndStartStory() {
     svg.style('display', 'unset')
-    bg.transition().duration(1000).style('opacity', 0.3)
+    bg.transition().duration(1000).style('opacity', 0.5)
 
     var durationBlink = 300
     var ease = d3.easeSin
