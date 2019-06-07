@@ -70,8 +70,8 @@ const story = [
   },
 
   {
-    'text_fr': 'Rafael Nadal a beaucoup participé aux phases finales du tournois entre 2005 et 2017, nous allons donc grossir largement le point <br>   &nbsp',
-    'text_en': "As he attended the final stages of the tournament a lot between 2005 and 2017, let's make it very large <br>   &nbsp",
+    'text_fr': 'Rafael Nadal a beaucoup participé aux phases finales du tournois entre 2005 et 2018, nous allons donc grossir largement le point <br>   &nbsp',
+    'text_en': "As he attended the final stages of the tournament a lot between 2005 and 2018, let's make it very large <br>   &nbsp",
     'f': function () {
       graph.select('#NADAL')
         .transition().duration(500 * jump)
@@ -193,8 +193,8 @@ const story = [
   },
 
   {
-    'text_fr': "On ajoute tous les joueurs pour visualiser le graph complet de la période 2005 - 2017 <br>  &nbsp ",
-    'text_en': "Let's add all the other final stages players between 2005 & 2017 <br>  &nbsp ",
+    'text_fr': "On ajoute tous les joueurs pour visualiser le graph complet de la période 2005 - 2018 <br>  &nbsp ",
+    'text_en': "Let's add all the other final stages players between 2005 & 2018 <br>  &nbsp ",
     'f': function () {
 
       loadTime(data_);
@@ -426,7 +426,7 @@ const story = [
     'f': function () {
       removeTooltip();
       restore('FEDERER');
-      dateTo = 2017;
+      dateTo = 2018;
       updateTime();
       update();
     }
@@ -463,12 +463,12 @@ const story = [
 
 
   {
-    'text_fr': "Et enfin les années 2005-2017 qui voient l'émergence d'une génération largement dominée par trois joueurs : Rafael Nadal, Rodger Federer et Novak Djokovic",
-    'text_en': "Finally comes the 2005-2017 period: a clear generation of 3 champions is born made of Rafael Nadal, Rodger Federer et Novak Djokovic",
+    'text_fr': "Et enfin les années 2005-2018 qui voient l'émergence d'une génération largement dominée par trois joueurs : Rafael Nadal, Rodger Federer et Novak Djokovic",
+    'text_en': "Finally comes the 2005-2018 period: a clear generation of 3 champions is born made of Rafael Nadal, Rodger Federer et Novak Djokovic",
     'f': function () {
       removeTooltip();
       dateFrom = 2005
-      dateTo = 2017
+      dateTo = 2018
       updateTime();
       update();
     }

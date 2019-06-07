@@ -4,7 +4,7 @@
 var width = window.innerWidth,
     height = window.innerHeight-50,
     dateFrom = 2005,
-    dateTo = 2017,
+    dateTo = 2018,
     strength = 40,
     timeWidthMargin = 100,
     timeHeightMargin = 50,
@@ -115,7 +115,7 @@ function loadInitialGraph(){
     tooltips.selectAll('*').remove()
     time.selectAll('*').remove()
     dateFrom = 2005;
-    dateTo = 2017;
+    dateTo = 2018;
     date.html('')
 
     graph

@@ -71,11 +71,11 @@ function updateTime(){
 
 // Fonctions utiles
 function dateToX(date){
-    return timeWidthMargin+(date-1980)*(width-timeWidthMargin*2)/(2017-1980)
+    return timeWidthMargin+(date-1980)*(width-timeWidthMargin*2)/(2018-1980)
 }
 
 function xToDate(x){
-    return Math.max(Math.min(Math.round((x-timeWidthMargin)*(2017-1980)/(width-timeWidthMargin*2)+1980), 2017),1980)
+    return Math.max(Math.min(Math.round((x-timeWidthMargin)*(2018-1980)/(width-timeWidthMargin*2)+1980), 2018),1980)
 }
 
 function setOpacity(d){
