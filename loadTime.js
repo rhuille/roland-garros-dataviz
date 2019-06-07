@@ -1,5 +1,5 @@
 
-function loadTime(data){ // Main function
+function loadTime(){ // Main function
 
     // ticks of the time line
     time.append('g')
@@ -55,20 +55,24 @@ function updateTime(){
     pseudoDateFrom = dateFrom;
     pseudoDateTo = dateTo;
     
-    time.select('#to').transition().duration(1000).attr('cx', dateToX(dateTo) )
-    time.select('#from').transition().duration(1000).attr('cx', dateToX(dateFrom) )
-    d3.selectAll('.timeLine').transition().duration(1000).attr('opacity', setOpacity);
-    d3.selectAll('.timeLabel').transition().duration(1000).attr('opacity', setOpacity);
+    time.select('#to')
+    .transition().ease(d3.easeLinear).duration(1000*jump())
+    .attr('cx', dateToX(dateTo) )
+
+    time.select('#from')
+    .transition().ease(d3.easeLinear).duration(1000*jump())
+    .attr('cx', dateToX(dateFrom) )
+    
+    d3.selectAll('.timeLine').transition().duration(1000*jump()).attr('opacity', setOpacity);
+    d3.selectAll('.timeLabel').transition().duration(1000*jump()).attr('opacity', setOpacity);
     date.html(dateFrom+ ' - ' + dateTo);
 }
-
 
 
 // Fonctions utiles
 function dateToX(date){
     return timeWidthMargin+(date-1980)*(width-timeWidthMargin*2)/(2017-1980)
 }
-
 
 function xToDate(x){
     return Math.max(Math.min(Math.round((x-timeWidthMargin)*(2017-1980)/(width-timeWidthMargin*2)+1980), 2017),1980)
