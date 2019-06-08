@@ -423,7 +423,11 @@ function giveMeFeedBack() {
         container.style('filter', 'blur(2px)')
     })
     info.style('display', 'unset');
-    info.html("My mail addresse: ")
+    if(currentLangue=='en'){
+        info.html("Please, send me an email at rolandgarros.dataviz@gmail.com <br> Feedbacks are welcome !")
+    }else{
+       info.html("Commentez cette visualisation à l'adresse: rolandgarros.dataviz@gmail.com <br> Merci pour vos retours")
+    }
 
     info
     .append('span')
