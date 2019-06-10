@@ -4,8 +4,8 @@ var jump = 0.1;
 
 const story = [
   {
-    'text_fr': "Les internationaux de France Simple Messieurs - Rolland Garros - <br> est un tournois de tennis parmis les plus prestigieux du monde <br> D'incroyables générations de champions s'y succèdent sur la terre battue des courts ! ",
-    'text_en': "The French international Men's singles - Rolland Garros - <br> leads among worldwide tennis tournaments  <br> Successive generations of tennis champions fought for victory on the legendary clay court ! ",
+    'text_fr': "Les internationaux de France Simple Messieurs - Roland Garros - <br> est un tournois de tennis parmi les plus prestigieux du monde <br> D'incroyables générations de champions s'y succèdent sur la terre battue des courts ! ",
+    'text_en': "The French international Men's singles - Roland Garros - <br> leads among worldwide tennis tournaments  <br> Successive generations of tennis champions fought for victory on the legendary clay court ! ",
    'f': function () {
 
       img_intoContainer = textStory
@@ -103,7 +103,7 @@ const story = [
   },
   {
     'text_fr': "Dessinons lui un point plus petit comme il a moins participé aux phases finales que Nadal <br> &nbsp",
-    'text_en': "His point will be smaller because he took part in less Rolland Garros final stages than Rafa <br> &nbsp",
+    'text_en': "His point will be smaller because he took part in less Roland Garros final stages than Rafa <br> &nbsp",
     'f': function () {
       graph.select('#MURRAY')
         .transition().duration(500 * jump)
@@ -123,13 +123,13 @@ const story = [
 
 
   {
-    'text_fr': " <strong> Le rayon du point </strong> est proportionel est nombre d'année ou le joueur a atteind les quarts de final  <br><strong> L'intensité de la couleur </strong> du point est proportionel au taux de victoire du joueur ",
+    'text_fr': " <strong> Le rayon du point </strong> est proportionel est nombre d'année ou le joueur a atteind les quarts de final  <br><strong> L'intensité de la couleur </strong> du point est proportionelle au taux de victoires du joueur ",
     'text_en': " <strong> The point's radius </strong> is proportional to the number of years the tennis player reached the quarter-finals  <br><strong> The intensity of the point color </strong> is proportional to the player's victory rate",
     'f': function () { stop = 0; }
   },
 
   {
-    'text_fr': " Par exemple, voici comment on représente le suisse Rodger Federer <br> Il a plus participé que Murray, mais moins que Nadal. Son ratio de victoire est moins bon que Nadal",
+    'text_fr': " Par exemple, voici comment on représente le suisse Rodger Federer <br> Il a plus participé que Murray, mais moins que Nadal. Son ratio de victoires est moins bon que Nadal",
     'text_en': " For example, here is how you would represent Rodger Federer <br> He played more final stages than Murray but less than Nadal. His victory rate is not as good as Nadal's",
     'f': function () {
 
@@ -171,7 +171,7 @@ const story = [
 
 
   {
-    'text_fr': "Ajoutons celui entre Murray et Nadal. <br> On le dessine moins epais car Murray et Nadal se sont moins affronté que Federer et Nadal",
+    'text_fr': "Ajoutons celui entre Murray et Nadal. <br> On le dessine moins épais car Murray et Nadal se sont moins affrontés que Federer et Nadal",
     'text_en': "Let's add the link between Murray & Nadal. <br> Let's draw it thinner since Murray & Nadal did not play together as much as Federer & Nadal",
     'f': function () {
 
@@ -182,7 +182,7 @@ const story = [
   },
 
   {
-    'text_fr': " <strong> L'épaisseur du lien </strong> est proportionelle au nombre de match en phase finale entre les deux joueurs <br>  &nbsp",
+    'text_fr': " <strong> L'épaisseur du lien </strong> est proportionelle au nombre de matchs en phase finale entre les deux joueurs <br>  &nbsp",
     'text_en': " <strong> The thickness of the link </strong> is proportional to the amount of final stages matches between the two players <br>  &nbsp",
     'f': function () {
 
@@ -193,7 +193,7 @@ const story = [
   },
 
   {
-    'text_fr': "On ajoute tous les joueurs pour visualiser le graph complet de la période 2005 - 2018 <br>  &nbsp ",
+    'text_fr': "On ajoute tous les joueurs pour visualiser le graphe complet de la période 2005 - 2018 <br>  &nbsp ",
     'text_en': "Let's add all the other final stages players between 2005 & 2018 <br>  &nbsp ",
     'f': function () {
 
@@ -225,8 +225,8 @@ const story = [
   },
 
   {
-    'text_fr': "On voit se démarquer Rafael Nadal, le grand champion de Rolland Garros. <br> Il n'a perdu qu'une seule fois après les quarts de final ! ",
-    'text_en': "Rafael Nadal clearly stands above, he is the latest great champion of Rolland Garros. <br> He only lost once after the quarter-finals ! ",
+    'text_fr': "On voit se démarquer Rafael Nadal, le grand champion de Roland Garros. <br> Il n'a perdu qu'une seule fois après les quarts de finale ! ",
+    'text_en': "Rafael Nadal clearly stands above, he is the latest great champion of Roland Garros. <br> He only lost once after the quarter-finals ! ",
     'f': function () { look('NADAL'); stop = 0; }
   },
 
@@ -243,14 +243,14 @@ const story = [
   },
 
   {
-    'text_fr': "Le français Gael Monfils, qui a été éliminé 3 fois en quart de final et une fois en demi finale<br>  &nbsp",
+    'text_fr': "Le français Gael Monfils, qui a été éliminé 3 fois en quart de final et une fois en demi-finale<br>  &nbsp",
     'text_en': "The French player Gael Monfils, has been eliminated 3 times in the quarter-finals and once in the semi-finals<br>  &nbsp",
     'f': function () { restore('WAWRINKA'); look('MONFILS'); }
   },
 
 
   {
-    'text_fr': "Vous pouvez explorer le graph en passant la souris sur les points et les liens <br>  pour faire apparaire le nom du joueurs",
+    'text_fr': "Vous pouvez explorer le graphe en passant la souris sur les points et les liens <br>  pour faire apparaire le nom du joueurs",
     'text_en': "You can explore the graph by mousing over the points and links <br>  to show the names of the players",
     'f': function () {
       MouseOut()
@@ -270,7 +270,7 @@ const story = [
 
   },
   {
-    'text_fr': "Animons le graphe pour voir <strong>l'évolution</strong> des joueurs depuis 2005 <br> Allez a l'étape suivante pour lancer l'animation",
+    'text_fr': "Animons le graphe pour voir <strong>l'évolution</strong> des joueurs depuis 2005 <br> Allez à l'étape suivante pour lancer l'animation",
     'text_en': "Let's start animating the viz and seeing <strong>the evolution</strong> of the players since 2005 <br> Go to the next step to launch the animation",
     'f': function () {
       dateTo = 2005;
@@ -307,8 +307,8 @@ const story = [
   },
 
   {
-    'text_fr': " Ainsi Borg a déjà remporté 6 fois Rolland Garros. <br> Ces données ne sont pas disponibles, cela n'est donc pas visible sur la taille du point qui le représente ",
-    'text_en': " Although Borg won Rolland Garros 6 times, <br> these data are not available and it is thus not visible on the point representing him ",
+    'text_fr': " Ainsi Borg a déjà remporté 6 fois Roland Garros. <br> Ces données ne sont pas disponibles, cela n'est donc pas visible sur la taille du point qui le représente ",
+    'text_en': " Although Borg won Roland Garros 6 times, <br> these data are not available and it is thus not visible on the point representing him ",
     'f': function () {
       look('BORG');
     }
@@ -341,7 +341,7 @@ const story = [
   },
 
   {
-    'text_fr': "Notez comment le graph va s'étendre progressivement vers la droite... <br> &nbsp  ",
+    'text_fr': "Notez comment le graphe va s'étendre progressivement vers la droite... <br> &nbsp  ",
     'text_en': "The graph is progressively expending to the right... <br> &nbsp  ",
     'f': function () {
       removeTooltip();
@@ -356,7 +356,7 @@ const story = [
   },
 
   {
-    'text_fr': "En 1988 c'est la fin de cette génération et une nouvelle va apparaitre. <br> Voyez-vous la différence avec la précédente ?  ",
+    'text_fr': "En 1988 c'est la fin de cette génération et une nouvelle va apparaître. <br> Voyez-vous la différence avec la précédente ?  ",
     'text_en': "In 1988 you can note the end of a generation and a new one is going to emerge. <br> Can you see the difference with the previous one ?  ",
     'f': function () {
       evolution(1997);
@@ -372,7 +372,7 @@ const story = [
   },
 
   {
-    'text_fr': "Et puis Courier et Bruguera : vainqueur 2 fois chacun",
+    'text_fr': "Et puis Courier et Bruguera : vainqueurs deux fois chacun",
     'text_en': "Courier & Bruguera :  won twice each",
     'f': function () {
       restore('MUSTER'); restore('KAFELNIKOV');
@@ -421,7 +421,7 @@ const story = [
   },
 
   {
-    'text_fr': "Voici, enfin le graph en entier : <br> vers la gauche on voit les joueurs les plus anciens, et vers la droite les plus récents",
+    'text_fr': "Voici, enfin le graphe en entier : <br> vers la gauche on voit les joueurs les plus anciens, et vers la droite les plus récents",
     'text_en': "Here comes the full graph : <br> you can see the older players on the left, and the most recent ones on the right",
     'f': function () {
       removeTooltip();
@@ -438,8 +438,8 @@ const story = [
   },
 
   {
-    'text_fr': "D'abord la période 1980 - 1988 :dominé par Lendl, Connors et Willander",
-    'text_en': "The first one between 1980 - 1988 : led by Lendl, Connors & Willander",
+    'text_fr': "D'abord la période 1980 - 1988 : dominée par Lendl, Connors et Willander",
+    'text_en': "The first one between 1980 - 1988: led by Lendl, Connors & Willander",
     'f': function () {
       removeTooltip();
       dateFrom = 1980;
